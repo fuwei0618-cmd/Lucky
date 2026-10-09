@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+<script>try{if(localStorage.getItem("origina-return")&&/[?&](code|error)=/.test(location.search)){document.documentElement.style.visibility="hidden";setTimeout(function(){document.documentElement.style.visibility=""},6000);}}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
@@ -1199,6 +1200,9 @@ async function handleRedirect(){
   history.replaceState(null,"",REDIRECT+location.hash);
   if(p.get("state")!==st.state)return;
   ls(PKCE_KEY,null);
+  // Origina 其他 App 借用這裡登入：換完 token 回到原本的 App（見 Entry/sync/origina-sync.js）
+  const back=ls("origina-return");
+  if(back){ls("origina-return",null);if(!p.has("error"))await tokenRequest({grant_type:"authorization_code",code:p.get("code"),redirect_uri:REDIRECT,code_verifier:st.verifier});location.replace(back);await new Promise(()=>{});}
   if(p.has("error"))return;
   await tokenRequest({grant_type:"authorization_code",code:p.get("code"),redirect_uri:REDIRECT,code_verifier:st.verifier});
 }
