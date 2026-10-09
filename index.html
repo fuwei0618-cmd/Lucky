@@ -790,13 +790,13 @@ async function rebuy(id){
 function render(){
   renderHeader();
   const st=$("#status");
-  if(S.auth==="out"||S.auth==="expired")st.innerHTML='<div class="card loginbox"><h2>'+(S.auth==="expired"?"請重新登入":"登入就能開始記錄")+'</h2><p class="small muted" style="margin:0">紀錄、照片和影片會存在你的 OneDrive「應用程式／Lucky 手冊」資料夾，只有你看得到。</p><button class="primary" data-login>用 Microsoft 帳號登入</button></div>';
+  if(S.auth==="out"||S.auth==="expired")st.innerHTML='<div class="card loginbox"><h2>'+(S.auth==="expired"?"請重新登入":"登入就能開始記錄")+'</h2><p class="small muted" style="margin:0">紀錄、照片和影片會存在你的 OneDrive「應用程式／Origina／Lucky」資料夾，只有你看得到。</p><button class="primary" data-login>用 Microsoft 帳號登入</button></div>';
   else if(S.sync==="offline")st.innerHTML='<div class="notice">目前沒有連上 OneDrive，新的文字紀錄會先存在這支手機，連上網路後自動同步。照片和影片要連線才能上傳。</div>';
   else st.innerHTML="";
   const m=$("#main");
   m.innerHTML = S.tab==="diary"?renderDiary():S.tab==="places"?renderPlaces():S.tab==="friends"?renderFriends():S.tab==="train"?renderTrain():renderLucky();
   document.querySelectorAll(".nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===S.tab?"page":"false"));
-  if(S.tab==="lucky"&&S.auth==="in")m.insertAdjacentHTML("beforeend",'<section class="sec"><h2>帳號</h2><div class="card"><dl class="kv"><dt>登入</dt><dd>'+esc(S.me||"Microsoft 帳號")+'</dd><dt>存放</dt><dd>OneDrive「應用程式／Lucky 手冊」</dd><dt>同步</dt><dd>'+(S.sync==="offline"?"還沒同步，等網路恢復":DIRTY?"同步中⋯":"已同步")+'</dd></dl><button class="ghost" id="logoutBtn" style="margin-top:12px">登出</button></div></section>');
+  if(S.tab==="lucky"&&S.auth==="in")m.insertAdjacentHTML("beforeend",'<section class="sec"><h2>帳號</h2><div class="card"><dl class="kv"><dt>登入</dt><dd>'+esc(S.me||"Microsoft 帳號")+'</dd><dt>存放</dt><dd>OneDrive「應用程式／Origina／Lucky」</dd><dt>同步</dt><dd>'+(S.sync==="offline"?"還沒同步，等網路恢復":DIRTY?"同步中⋯":"已同步")+'</dd></dl><button class="ghost" id="logoutBtn" style="margin-top:12px">登出</button></div></section>');
   $("#fab").hidden=!S.db||S.tab==="train";
 }
 
