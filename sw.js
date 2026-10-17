@@ -1,5 +1,5 @@
 // Lucky 手冊 offline cache. Bump VERSION whenever index.html changes.
-const VERSION = "lucky-v9";
+const VERSION = "lucky-v10";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
