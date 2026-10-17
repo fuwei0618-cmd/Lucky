@@ -221,7 +221,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0
 .nav button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:12px;color:var(--muted);padding:4px 0}
 .nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .nav button[aria-current="page"]{color:var(--steel);font-weight:700}
-.fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(78px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:0;background:var(--steel);color:var(--steel-ink);box-shadow:0 0 0 4px var(--bg),0 0 0 6px var(--steel),var(--shadow);font-size:30px;line-height:1;z-index:21;display:grid;place-items:center}
+.fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(128px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:0;background:var(--steel);color:var(--steel-ink);box-shadow:0 0 0 4px var(--bg),0 0 0 6px var(--steel),var(--shadow);font-size:30px;line-height:1;z-index:21;display:grid;place-items:center}
 
 /* sheet */
 .scrim{position:fixed;inset:0;background:rgba(10,15,20,.45);z-index:40;display:flex;align-items:flex-end;justify-content:center}
@@ -254,11 +254,16 @@ h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 14px;font-size:14px;z-index:70;display:flex;gap:12px;align-items:center;max-width:calc(100% - 32px)}
 .toast button{border:0;background:none;color:var(--tan);font-weight:700;padding:0}
 @media (prefers-reduced-motion:no-preference){.sheet{animation:up .22s ease-out}@keyframes up{from{transform:translateY(24px);opacity:.6}}}
+/* Origina 操作規則：回首頁在左上、同步雲朵在右下 */
+.back{display:inline-block;margin-top:12px;font-size:13px;color:var(--muted);text-decoration:none}
+.cloud{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:6px;height:34px;padding:0 10px;border:0;border-radius:999px;background:rgba(43,39,36,.82);color:#F4EFE7;font:600 12px/1 -apple-system,"PingFang TC","Noto Sans TC",sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.18);cursor:pointer}
+.cloud svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.cloud i{width:7px;height:7px;border-radius:50%;background:#8FD18F}.cloud.busy i{background:#F2C14E}.cloud.err i{background:#E8806B}.cloud.quiet span{display:none}
 </style>
 </head>
 <body>
 
 <div class="app" id="app">
+  <a class="back" id="backO" href="https://fuwei0618-cmd.github.io/Entry/map/">← Origina</a>
   <header class="hdr">
     <div>
       <h1 id="dogName">Lucky</h1>
@@ -271,6 +276,7 @@ h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0
 </div>
 
 <button class="fab" id="fab" aria-label="新增紀錄">＋</button>
+<button class="cloud" id="cloud" aria-label="OneDrive 同步" hidden><svg viewBox="0 0 24 24"><path d="M7 18h10.5a4 4 0 0 0 .4-8 6 6 0 0 0-11.6 1.6A3.3 3.3 0 0 0 7 18z"/></svg><i></i><span></span></button>
 
 <nav class="nav" aria-label="分頁">
   <div class="nav-in">
@@ -636,7 +642,7 @@ async function downloadMedia(btn,e){
 
 /* ---------- places ---------- */
 function renderPlaces(){
-  let h='<section class="sec"><div class="sec-h"><h2>Lucky 去過的地方</h2><button class="link-btn" data-add="place">＋ 新增</button></div>'+
+  let h='<section class="sec"><div class="sec-h"><h2>Lucky 去過的地方</h2></div>'+
     '<div class="hint">點「地圖」會在 Google 地圖開啟。新增地點時貼上 Google 地圖的分享連結，就能記住位置。</div>';
   if(!S.places.length){
     h+='<div class="card empty"><h3>還沒有地點</h3><p>常去的公園、尿尿點、動物醫院、美容店、寄宿的地方，都可以收在這裡。</p></div>';
@@ -671,7 +677,7 @@ function renderPlaces(){
 function renderFriends(){
   const kind=S.friendKind;
   const list=S.friends.filter(f=>(f.kind||"dog")===kind).sort((a,b)=>RELS.indexOf(a.rel||"普通")-RELS.indexOf(b.rel||"普通"));
-  let h='<section class="sec"><div class="sec-h"><h2>Lucky 的通訊錄</h2><button class="link-btn" data-add="friend">＋ 新增</button></div>'+
+  let h='<section class="sec"><div class="sec-h"><h2>Lucky 的通訊錄</h2></div>'+
     '<div class="seg" role="group"><button data-fkind="dog" aria-pressed="'+(kind==="dog")+'">狗朋友</button><button data-fkind="person" aria-pressed="'+(kind==="person")+'">喜歡牠的人</button></div>';
   if(!list.length){
     h+='<div class="card empty"><h3>'+(kind==="dog"?"還沒有狗朋友":"還沒有人")+'</h3><p>'+(kind==="dog"?"散步遇到合得來的狗，記下牠叫什麼、在哪認識、主人怎麼聯絡。":"保母、鄰居、美容師、常摸 Lucky 的朋友，都可以放在這裡。")+'</p></div>';
@@ -753,7 +759,7 @@ function renderLucky(){
   const cat=S.itemCat;
   const lastBuy=i=>(i.buys&&i.buys.length?i.buys[i.buys.length-1]:"")||(i.createdAt||"").slice(0,10);
   const items=S.items.filter(i=>cat==="all"||i.cat===cat).sort((a,b)=>lastBuy(b).localeCompare(lastBuy(a)));
-  h+='<section class="sec"><div class="sec-h"><h2>買過的東西</h2><button class="link-btn" data-add="item">＋ 新增</button></div>'+
+  h+='<section class="sec"><div class="sec-h"><h2>買過的東西</h2></div>'+
     '<div class="chips" role="group">'+['<button class="chip" data-icat="all" aria-pressed="'+(cat==="all")+'">全部</button>'].concat(ITEM_CATS.map(c=>'<button class="chip" data-icat="'+c+'" aria-pressed="'+(cat===c)+'">'+c+'</button>')).join("")+'</div>';
   if(!items.length)h+='<div class="card empty"><p>飼料、零食、玩具、洗澡用品⋯⋯記下牌子、在哪買、Lucky 喜不喜歡，下次回購不用想。</p></div>';
   for(const it of items){
@@ -798,9 +804,15 @@ function render(){
   document.querySelectorAll(".nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===S.tab?"page":"false"));
   if(S.tab==="lucky"&&S.auth==="in")m.insertAdjacentHTML("beforeend",'<section class="sec"><h2>帳號</h2><div class="card"><dl class="kv"><dt>登入</dt><dd>'+esc(S.me||"Microsoft 帳號")+'</dd><dt>存放</dt><dd>OneDrive「應用程式／Origina／Lucky」</dd><dt>同步</dt><dd>'+(S.sync==="offline"?"還沒同步，等網路恢復":DIRTY?"同步中⋯":"已同步")+'</dd></dl><button class="ghost" id="logoutBtn" style="margin-top:12px">登出</button></div></section>');
   $("#fab").hidden=!S.db||S.tab==="train";
+  renderCloud();
 }
 
 /* ---------- sheets ---------- */
+function renderCloud(){
+  const c=$("#cloud");if(!c||!S.loaded)return;c.hidden=false;
+  const out=S.auth==="out"||S.auth==="expired",st=out?"err":S.sync==="offline"?"err":DIRTY?"busy":"";
+  c.className="cloud "+st+(st?"":" quiet");c.querySelector("span").textContent=out?"登入 OneDrive":S.sync==="offline"?"還沒同步":DIRTY?"同步中…":"已同步";
+}
 function openSheet(title,bodyHtml,onMount){
   const r=$("#sheetRoot");
   r.innerHTML='<div class="scrim" id="scrim"><div class="sheet" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="sheet-h"><h2>'+esc(title)+'</h2><button class="x" id="sheetX" aria-label="關閉">✕</button></div>'+bodyHtml+'</div></div>';
@@ -1120,6 +1132,8 @@ async function clearExamples(btn){
 
 /* ---------- events ---------- */
 document.querySelector(".nav").addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;S.tab=b.dataset.tab;render();window.scrollTo(0,0);});
+$("#cloud").onclick=()=>{if(S.auth!=="in"){login(false);return;}S.tab="lucky";render();setTimeout(()=>{const h=[...document.querySelectorAll("#main h2")].find(x=>x.textContent==="帳號");h&&h.scrollIntoView({behavior:"smooth"});},50);};
+if(window.top!==window.self){const b=$("#backO");b&&(b.style.visibility="hidden");}
 $("#fab").onclick=()=>{
   if(S.tab==="places")openPlace();else if(S.tab==="friends")openFriend();else if(S.tab==="lucky")openItem();else openEntry();
 };
@@ -1456,7 +1470,6 @@ if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWor
 })();
 </script>
 
-<a class="to-origina" href="https://fuwei0618-cmd.github.io/Entry/map/" aria-label="回到 Origina 地圖">↖ Origina</a><script>if(window.top!==window.self){var _o=document.querySelector(".to-origina");_o&&_o.remove();}</script>
-<style>.to-origina{position:fixed;left:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:15;font:600 12px/1 "Noto Sans TC",system-ui,sans-serif;letter-spacing:.04em;text-decoration:none;color:#2B2724;background:rgba(236,232,225,.88);border:1px solid rgba(43,39,36,.18);border-radius:999px;padding:7px 11px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}</style>
+
 </body>
 </html>
