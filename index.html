@@ -16,34 +16,35 @@
 <title>Lucky 手冊</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=DotGothic16&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600&display=swap">
 <style>
 /* Layout: instant-photo album — prints on a table. Photo entries are polaroids in a 2-up grid per day, text-only entries are slim labels; film date-stamp orange is the one accent. Fixed bottom nav, black shutter-style add button. */
 :root{
-  --bg:#ecebe7; --surface:#ffffff; --sunk:#e2e0da; --ink:#1c1b19; --muted:#6c6963; --line:#d8d5ce;
-  --steel:#1c1b19; --steel-ink:#ffffff; --tan:#d9641c; --tan-soft:#f8e3d3; --tan-ink:#8a3a0a;
-  --frame:#fdfdfb; --frame-ink:#1c1b19; --frame-muted:#77736c; --photo:#d9d6cf;
-  --c-walk:#3f6f99; --c-toilet:#b8792b; --c-food:#c25a27; --c-vet:#b5404a; --c-friend:#3d8657; --c-skill:#7154a6; --c-other:#6c6963;
-  --shadow:0 1px 1px rgba(28,27,25,.08),0 4px 12px rgba(28,27,25,.10);
-  --f-display:"LXGW WenKai TC","Kaiti TC","STKaiti","Noto Serif TC",serif;
+  --bg:#e8e7e3; --surface:#f7f6f3; --sunk:#dedcd7; --ink:#2b2a27; --muted:#76736d; --line:#d2cfc9; --hair:#e6e3de;
+  --steel:#2b2a27; --steel-ink:#f7f6f3; --tan:#6f8a62; --tan-soft:#e2e8db; --tan-ink:#3e5034;
+  --frame:#f7f6f3; --frame-ink:#2b2a27; --frame-muted:#7b7872; --photo:#d5d3ce;
+  --c-walk:#5c7a93; --c-toilet:#9a8259; --c-food:#9a7059; --c-vet:#9b5a5a; --c-friend:#5f7f55; --c-skill:#76689a; --c-other:#7b7872;
+  --shadow:0 0 0 1px var(--line), inset 0 0 0 3px var(--surface), inset 0 0 0 4px var(--hair);
+  --f-display:"Noto Serif TC","Songti TC",serif;
   --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --f-mark:"Barlow Condensed","Arial Narrow",sans-serif;
-  --f-stamp:"DotGothic16","Courier New",monospace;
-  --r:6px;
+  --f-mark:"Noto Serif TC","Songti TC",serif;
+  --f-stamp:"Noto Sans TC","PingFang TC",sans-serif;
+  --r:3px;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#141413; --surface:#1f1e1c; --sunk:#2a2926; --ink:#eeece7; --muted:#a39f97; --line:#363430;
-  --steel:#eeece7; --steel-ink:#141413; --tan:#ff8b3d; --tan-soft:#3b2416; --tan-ink:#ffc39a;
-  --frame:#ecebe5; --frame-ink:#1c1b19; --frame-muted:#6c6963; --photo:#3a3834;
-  --c-walk:#82b2dc; --c-toilet:#e3aa5c; --c-food:#ee8f5d; --c-vet:#ec7f86; --c-friend:#7cc596; --c-skill:#b097e2; --c-other:#a39f97;
-  --shadow:0 1px 1px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.45); color-scheme:dark;
+  --bg:#1c1c1a; --surface:#262624; --sunk:#30302d; --ink:#ecebe6; --muted:#a29f98; --line:#3a3936; --hair:#2f2e2b;
+  --steel:#ecebe6; --steel-ink:#1c1c1a; --tan:#a9c39b; --tan-soft:#2b3427; --tan-ink:#d2e2c7;
+  --frame:#262624; --frame-ink:#ecebe6; --frame-muted:#a29f98; --photo:#3a3936;
+  --c-walk:#9db6cb; --c-toilet:#cdb68c; --c-food:#cfa58b; --c-vet:#d29393; --c-friend:#a5c49a; --c-skill:#b3a7d4; --c-other:#a29f98;
+  --shadow:0 0 0 1px var(--line), inset 0 0 0 3px var(--surface), inset 0 0 0 4px var(--hair); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bg:#141413; --surface:#1f1e1c; --sunk:#2a2926; --ink:#eeece7; --muted:#a39f97; --line:#363430;
-  --steel:#eeece7; --steel-ink:#141413; --tan:#ff8b3d; --tan-soft:#3b2416; --tan-ink:#ffc39a;
-  --frame:#ecebe5; --frame-ink:#1c1b19; --frame-muted:#6c6963; --photo:#3a3834;
-  --c-walk:#82b2dc; --c-toilet:#e3aa5c; --c-food:#ee8f5d; --c-vet:#ec7f86; --c-friend:#7cc596; --c-skill:#b097e2; --c-other:#a39f97;
-  --shadow:0 1px 1px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.45); color-scheme:dark;
+  --bg:#1c1c1a; --surface:#262624; --sunk:#30302d; --ink:#ecebe6; --muted:#a29f98; --line:#3a3936; --hair:#2f2e2b;
+  --steel:#ecebe6; --steel-ink:#1c1c1a; --tan:#a9c39b; --tan-soft:#2b3427; --tan-ink:#d2e2c7;
+  --frame:#262624; --frame-ink:#ecebe6; --frame-muted:#a29f98; --photo:#3a3936;
+  --c-walk:#9db6cb; --c-toilet:#cdb68c; --c-food:#cfa58b; --c-vet:#d29393; --c-friend:#a5c49a; --c-skill:#b3a7d4; --c-other:#a29f98;
+  --shadow:0 0 0 1px var(--line), inset 0 0 0 3px var(--surface), inset 0 0 0 4px var(--hair); color-scheme:dark;
 }
 *{box-sizing:border-box}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -303,6 +304,44 @@ ul.plain li{margin:4px 0}
 .lbl{margin-top:4px}
 .wsvg{width:100%;height:auto;display:block;margin-bottom:6px}
 .handover{white-space:pre-wrap;font-size:14px;line-height:1.7;word-break:break-word}
+/* 2026-11-15 風格：清水模＋極簡方正照片 */
+html,body{background:var(--bg) var(--grain)}
+.hdr h1{font-family:var(--f-display);font-size:34px;letter-spacing:.12em;text-transform:none;font-weight:600}
+.hdr .count,.hdr .stamp{font-family:var(--f-body);font-size:13px;letter-spacing:.04em;color:var(--tan-ink)}
+.pola{transform:none!important;padding:6px;border-radius:var(--r)}
+.pola:active{transform:scale(.98)!important}
+.pola-img{border-radius:1px}
+.datestamp{font-family:var(--f-body);font-size:11px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5);letter-spacing:.03em}
+.pola-cap{font-family:var(--f-body);font-size:14px;margin-top:4px}
+.dayhead b{font-family:var(--f-display);font-size:24px;font-weight:600}
+.monthhead{font-family:var(--f-body);letter-spacing:.12em;font-size:13px}
+.chip,.seg,.seg button,.qbtn,.ghost,.primary,.danger,.capbtn,.field input,.field select,.field textarea{border-radius:var(--r)}
+.chip[aria-pressed="true"]{background:var(--tan-ink);border-color:var(--tan-ink);color:var(--surface)}
+.state.s2{background:var(--tan);color:var(--surface)}
+.stat b{font-family:var(--f-display);font-weight:600;font-size:21px}
+.thumb{border-width:3px;border-bottom-width:3px;border-radius:var(--r)}
+.sheet{border-radius:10px 10px 0 0}
+.sec-h h2,.sec h2{letter-spacing:.02em}
+.todayp{display:none}
+
+@media (min-width:900px) and (orientation:landscape){
+  .nav{top:0;bottom:0;right:auto;width:88px;border-top:0;border-right:1px solid var(--line);padding:calc(16px + env(safe-area-inset-top,0px)) 0 16px}
+  .nav-in{display:flex;flex-direction:column;gap:22px;margin:56px 0 0}
+  .nav button{font-size:12px}
+  .app{max-width:none;margin:0 324px 0 88px;padding-inline:32px;padding-block:0 60px}
+  .todayp{display:block;position:fixed;top:0;bottom:0;right:0;width:324px;overflow-y:auto;background:var(--surface);border-left:1px solid var(--line);padding:calc(22px + env(safe-area-inset-top,0px)) 20px 24px}
+  .todayp h2{font-family:var(--f-display);font-size:22px;margin:0}
+  .todayp .tdate{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .todayp .card{box-shadow:none;padding:0 2px;background:none}
+  .pgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tbl.wide table{min-width:0}
+  .fab{right:calc(324px + 24px);bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .cloud{right:calc(324px + 24px);bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  .toast{left:calc(88px + (100% - 412px)/2)}
+  .scrim{align-items:center}
+  .sheet{border-radius:10px;max-height:86%}
+}
 </style>
 </head>
 <body>
@@ -333,6 +372,7 @@ ul.plain li{margin:4px 0}
   </div>
 </nav>
 
+<aside class="todayp" id="todayp" aria-label="今天"></aside>
 <div id="sheetRoot"></div>
 <div id="lbRoot"></div>
 <div id="toastRoot"></div>
@@ -1220,6 +1260,23 @@ function render(){
   if(S.tab==="lucky"&&S.auth==="in")m.insertAdjacentHTML("beforeend",'<section class="sec"><h2>帳號</h2><div class="card"><dl class="kv"><dt>登入</dt><dd>'+esc(S.me||"Microsoft 帳號")+'</dd><dt>存放</dt><dd>OneDrive「應用程式／Origina／Lucky」</dd><dt>同步</dt><dd>'+(S.sync==="offline"?"還沒同步，等網路恢復":DIRTY?"同步中⋯":"已同步")+'</dd></dl><button class="ghost" id="logoutBtn" style="margin-top:12px">登出</button></div></section>');
   $("#fab").hidden=!S.db||!["diary","places","friends","lucky","budget"].includes(S.tab);
   renderCloud();
+  renderToday();
+}
+function renderToday(){
+  const el=$("#todayp");if(!el)return;
+  const di=dayInfo(today());
+  const daily=CAL.filter(t=>t.f==="d");const n=daily.filter(isDone).length;
+  const wk=CAL.filter(t=>t.f==="w");const nw=wk.filter(isDone).length;
+  const al=dueAlerts();
+  const p=S.profile||{};
+  let sub=(p.breed||"約克夏");
+  if(p.homeDate){const k=daysBetween(p.homeDate,today());sub+=k>=0?"・到家第 "+(k+1)+" 天":"・再 "+(-k)+" 天到家";}else sub+="・還沒到家";
+  el.innerHTML='<h2>今天</h2><div class="tdate">'+di.m+' 月 '+di.d+' 日 週'+di.wd+'　'+esc(sub)+'</div>'+
+    (al.length?'<div class="due" style="margin-bottom:12px">'+al.map(x=>'<div>'+x+'</div>').join("")+'</div>':'')+
+    '<div class="sec-h"><span class="small muted">每天的事</span><span class="small muted">'+n+' / '+daily.length+'</span></div>'+
+    '<div class="card">'+daily.map(t=>calRow(t,true).replace('id="cal-','id="tp-cal-').replace('for="cal-','for="tp-cal-')).join("")+'</div>'+
+    '<div class="sec-h" style="margin-top:16px"><span class="small muted">這週</span><span class="small muted">'+nw+' / '+wk.length+'</span></div>'+
+    '<button class="ghost" data-go="cal" style="width:100%;margin-top:6px">打開行事曆</button>';
 }
 
 /* ---------- sheets ---------- */
@@ -1606,6 +1663,8 @@ $("#main").addEventListener("keydown",e=>{
   if(e.key==="Enter"&&e.target.id==="newSkill"){addSkill();return;}
 });
 $("#status").addEventListener("click",e=>{if(e.target.closest("[data-login]"))login(false);});
+$("#todayp").addEventListener("change",e=>{const cc=e.target.closest("[data-cal]");if(!cc)return;if(!S.db){cc.checked=!cc.checked;toast("請先登入 Microsoft 帳號");return;}toggleCal(cc.dataset.cal);});
+$("#todayp").addEventListener("click",e=>{const b=e.target.closest("[data-go]");if(b){S.tab=b.dataset.go;render();window.scrollTo(0,0);}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){if($("#lbRoot").innerHTML)$("#lbRoot").innerHTML="";else closeSheet();}});
 function showLb(id){const r=$("#lbRoot");r.innerHTML='<div class="lb" id="lb"><img src="'+blob(id)+'" alt="照片"></div>';$("#lb").onclick=()=>{r.innerHTML="";};}
 
