@@ -258,6 +258,51 @@ h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0
 .back{display:inline-block;margin-top:12px;font-size:13px;color:var(--muted);text-decoration:none}
 .cloud{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:6px;height:34px;padding:0 10px;border:0;border-radius:999px;background:rgba(43,39,36,.82);color:#F4EFE7;font:600 12px/1 -apple-system,"PingFang TC","Noto Sans TC",sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.18);cursor:pointer}
 .cloud svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8}.cloud i{width:7px;height:7px;border-radius:50%;background:#8FD18F}.cloud.busy i{background:#F2C14E}.cloud.err i{background:#E8806B}.cloud.quiet span{display:none}
+/* 2026-11 規劃頁 */
+.backmore{margin-top:10px;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tile{background:var(--surface);border:0;border-radius:var(--r);box-shadow:var(--shadow);padding:14px;text-align:left;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tile b{font-family:var(--f-display);font-size:18px}
+.tile span{font-size:12px;color:var(--muted);line-height:1.45}
+.tbl{overflow-x:auto;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow)}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl th{font-size:12px;color:var(--muted);font-weight:500;white-space:nowrap}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tr.now td{background:var(--tan-soft);color:var(--tan-ink)}
+.tbl.wide table{min-width:660px}
+.matrix tbody th{font-family:var(--f-display);font-size:15px;color:var(--ink);background:var(--sunk)}
+.mx{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:4px 7px;margin-bottom:5px;font-size:12.5px;line-height:1.4}
+.mx.on{background:var(--tan-soft);border-color:transparent;color:var(--tan-ink);text-decoration:line-through}
+ul.plain{margin:4px 0;padding-left:20px}
+ul.plain li{margin:4px 0}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.stat{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.stat span{font-size:12px;color:var(--muted)}
+.stat b{font-family:var(--f-mark);font-size:22px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.costrow{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:none;border-bottom:1px solid var(--line);padding:8px 0;text-align:left;font-size:14px}
+.costrow:last-child{border-bottom:0}
+.costrow .d{font-family:var(--f-stamp);font-size:12px;color:var(--muted);min-width:76px}
+.costrow .grow{flex:1;min-width:0}
+.costrow b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.ctag{font-size:11px;color:var(--muted);background:var(--sunk);border-radius:4px;padding:0 6px;white-space:nowrap}
+.due{background:var(--tan);color:#fff;border-radius:var(--r);padding:10px 14px;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.fy{display:flex;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.fy:last-child{border-bottom:0}
+.fy .when{min-width:84px;font-family:var(--f-mark);font-size:16px;line-height:1.15}
+.fy .when small{font-family:var(--f-body);font-size:11px;color:var(--muted)}
+.fy .grow{flex:1;min-width:0}
+.fy.past{color:var(--muted);text-decoration:line-through}
+.stage{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);padding:12px 14px;border-left:4px solid var(--line)}
+.stage.now{border-left-color:var(--tan)}
+.stage-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.stage-h b{font-family:var(--f-display);font-size:17px}
+.stage-h span{font-size:12px;color:var(--muted)}
+.stage.now .stage-h span{color:var(--tan-ink);font-weight:700}
+.prio details p{margin:6px 0 0 26px}
+.lbl{margin-top:4px}
+.wsvg{width:100%;height:auto;display:block;margin-bottom:6px}
+.handover{white-space:pre-wrap;font-size:14px;line-height:1.7;word-break:break-word}
 </style>
 </head>
 <body>
@@ -281,10 +326,10 @@ h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0
 <nav class="nav" aria-label="分頁">
   <div class="nav-in">
     <button data-tab="diary" aria-current="page"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg>日記</button>
-    <button data-tab="places"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>地點</button>
-    <button data-tab="friends"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c3 0 5 2.2 5 5.5"/></svg>朋友</button>
+    <button data-tab="cal"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/><path d="M8.5 14.5l2 2 4-4"/></svg>行事曆</button>
+    <button data-tab="care"><svg viewBox="0 0 24 24"><path d="M5 12h14l-1.5 6.5a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5z"/><path d="M8 12c0-2.5 1.8-4.5 4-4.5s4 2 4 4.5"/><circle cx="12" cy="5" r="1.2"/></svg>照顧</button>
     <button data-tab="train"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/></svg>訓練</button>
-    <button data-tab="lucky"><svg viewBox="0 0 24 24"><circle cx="7" cy="9" r="1.8"/><circle cx="11" cy="5.5" r="1.8"/><circle cx="16" cy="6" r="1.8"/><circle cx="19" cy="10.5" r="1.8"/><path d="M8 17c0-3 2.5-5.5 5-5.5s5 2.5 4 5.5c-.6 2-2.5 2.5-4.5 2.5S8 19 8 17z"/></svg>Lucky</button>
+    <button data-tab="more"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>更多</button>
   </div>
 </nav>
 
@@ -318,8 +363,8 @@ const PLACE_KINDS = ["寵物友善餐廳","散步／公園","動物醫院","美�
 const ITEM_CATS = ["飼料","零食","玩具","洗澡清潔","用品","保健"];
 const RATINGS = ["很喜歡","普通","不喜歡"];
 const RELS = ["最愛","好朋友","普通","要小心"];
-const DEFAULT_KIT = ["牽繩／胸背帶","拾便袋","濕紙巾","水和水碗","獎勵用零食","小毛巾","手機（記得拍照）"];
-const DEFAULT_CLEAN = ["擦四隻腳掌和趾縫","擦屁股","檢查有沒有草籽、壁蝨","梳開打結的毛","補充飲水"];
+const DEFAULT_KIT = ["拾便袋","衛生紙","一小瓶水（沖尿過的地方）","訓練零食","牽繩和胸背帶","手機（記得拍照）"];
+const DEFAULT_CLEAN = ["濕紙巾擦四隻腳掌和趾縫","用乾毛巾擦乾","擦肚子和胸口","擦屁股","擦嘴巴周圍","全身梳一下，順便檢查壁蝨","給一顆零食"];
 const DEFAULT_SKILLS = ["叫名字會回頭","定點上廁所","進籠子休息","坐下","等一下","過來","放掉","趴下","不撲人","乖乖讓人剪指甲","乖乖刷牙","戴胸背帶散步不暴衝"];
 const SOCIAL = ["陌生的大人","小孩","戴帽子或口罩的人","撐傘的人","其他友善的狗","貓","機車聲","腳踏車","吸塵器","吹風機","打雷或鞭炮聲","電梯","坐車","草地","磁磚地","水溝蓋","被抱給別人","動物醫院的味道"];
 
@@ -327,8 +372,11 @@ const SOCIAL = ["陌生的大人","小孩","戴帽子或口罩的人","撐傘的
 const S = {
   tab:"diary", filter:"all", friendKind:"dog", itemCat:"all",
   entries:[], places:[], friends:[], items:[], training:null, profile:null,
-  loaded:false, db:null, assets:null, canWrite:true, auth:"", sync:"", me:""
+  loaded:false, db:null, assets:null, canWrite:true, auth:"", sync:"", me:"",
+  calView:"time", calCat:"健康", careSec:"food", cleanLvl:0,
+  plan:{}, cal:{}, budget:{}, foster:{}, weights:[], costs:[]
 };
+try{const v=JSON.parse(localStorage.getItem("lucky-calview")||"null");if(v)S.calView=v;}catch(e){}
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
@@ -645,7 +693,7 @@ async function downloadMedia(btn,e){
 
 /* ---------- places ---------- */
 function renderPlaces(){
-  let h='<section class="sec"><div class="sec-h"><h2>Lucky 去過的地方</h2></div>'+
+  let h=backMore()+'<section class="sec"><div class="sec-h"><h2>Lucky 去過的地方</h2></div>'+
     '<div class="hint">點「地圖」會在 Google 地圖開啟。新增地點時貼上 Google 地圖的分享連結，就能記住位置。</div>';
   if(!S.places.length){
     h+='<div class="card empty"><h3>還沒有地點</h3><p>寵物友善餐廳、常去的公園、動物醫院、美容店、寄宿的地方，都可以收在這裡。</p></div>';
@@ -680,7 +728,7 @@ function renderPlaces(){
 function renderFriends(){
   const kind=S.friendKind;
   const list=S.friends.filter(f=>(f.kind||"dog")===kind).sort((a,b)=>RELS.indexOf(a.rel||"普通")-RELS.indexOf(b.rel||"普通"));
-  let h='<section class="sec"><div class="sec-h"><h2>Lucky 的通訊錄</h2></div>'+
+  let h=backMore()+'<section class="sec"><div class="sec-h"><h2>Lucky 的通訊錄</h2></div>'+
     '<div class="seg" role="group"><button data-fkind="dog" aria-pressed="'+(kind==="dog")+'">狗朋友</button><button data-fkind="person" aria-pressed="'+(kind==="person")+'">喜歡牠的人</button></div>';
   if(!list.length){
     h+='<div class="card empty"><h3>'+(kind==="dog"?"還沒有狗朋友":"還沒有人")+'</h3><p>'+(kind==="dog"?"散步遇到合得來的狗，記下牠叫什麼、在哪認識、主人怎麼聯絡。":"保母、鄰居、美容師、常摸 Lucky 的朋友，都可以放在這裡。")+'</p></div>';
@@ -706,7 +754,9 @@ function renderFriends(){
 /* ---------- training ---------- */
 function trainingState(){
   const t=S.training||{};
-  const skills=Array.isArray(t.skills)&&t.skills.length?t.skills:DEFAULT_SKILLS.map((n,i)=>({id:"s"+i,name:n,status:0}));
+  let skills=Array.isArray(t.skills)&&t.skills.length?t.skills:DEFAULT_SKILLS.map((n,i)=>({id:"s"+i,name:n,status:0}));
+  const have=new Set(skills.map(x=>x.name));
+  skills=skills.concat(EXTRA_SKILLS.filter(n=>!have.has(n)).map(n=>({id:"x"+hsh(n),name:n,status:0})));
   return {skills,social:t.social||{}};
 }
 const STATES=["還沒開始","練習中","學會了"];
@@ -714,13 +764,10 @@ function renderTrain(){
   const T=trainingState();
   const learned=T.skills.filter(s=>s.status===2).length;
   const socialDone=SOCIAL.filter(x=>T.social[x]).length;
-  let h='<section class="sec"><h2>從小狗開始，依序要教的事</h2><div class="prio">'+
-  '<details open><summary>定點上廁所</summary><p>最優先。約克夏出名的難教，要有耐心。</p><ul><li>起床、吃完飯、玩完、睡醒後，立刻帶去定點</li><li>做對了馬上稱讚、給零食</li><li>尿錯地方不要罵，用酵素清潔劑把味道清乾淨</li></ul></details>'+
-  '<details><summary>社會化</summary><p>大約 3 到 14 週是關鍵期，讓牠多看、多聽、多聞。</p><ul><li>不同的人、聲音、地面、車子、友善的狗</li><li>疫苗還沒打完時，可以抱著出門看世界，不要讓牠落地</li><li>下面有一份社會化清單可以打勾</li></ul></details>'+
-  '<details><summary>接受觸碰</summary><p>約克夏是長毛犬，一輩子要梳毛、洗澡、剪指甲、刷牙、清耳朵。</p><ul><li>每天摸腳掌、耳朵、嘴巴、尾巴，摸完給獎勵</li><li>以後美容、看醫生都會輕鬆很多</li></ul></details>'+
+  let h=renderTrainPlan();
+  h+='<section class="sec"><h2>打底的兩件事</h2><div class="prio">'+
+  '<details><summary>定點上廁所</summary><p>最優先。約克夏出名的難教，要有耐心。</p><ul><li>起床、吃完飯、玩完、睡醒後，立刻帶去定點</li><li>做對了馬上稱讚、給零食</li><li>尿錯地方不要罵，用酵素清潔劑把味道清乾淨</li></ul></details>'+
   '<details><summary>獨處練習</summary><ul><li>從離開 5 分鐘開始，慢慢拉長</li><li>出門和回家都平淡一點，不要大驚小怪</li><li>可以預防分離焦慮和一直亂叫</li></ul></details>'+
-  '<details><summary>基本指令</summary><ul><li>叫名字會回頭、坐下、等一下、過來</li><li>「放掉」特別重要，小狗很愛亂撿東西吃</li><li>每次練 3 到 5 分鐘就好，一天幾次</li></ul></details>'+
-  '<details><summary>咬的力道和吠叫</summary><ul><li>玩的時候咬太大力，就停下來不玩</li><li>小型犬常被縱容，長大容易變成愛叫、會咬人的「小霸王」</li><li>叫的時候不要回應，安靜了再給注意</li></ul></details>'+
   '</div></section>';
 
   h+='<section class="sec"><div class="sec-h"><h2>技能進度</h2><span class="small muted">學會 '+learned+' / '+T.skills.length+'</span></div>'+
@@ -751,14 +798,11 @@ function checklist(key,items){
 }
 function renderLucky(){
   const p=S.profile||{};
-  const kit=p.walkKit&&p.walkKit.length?p.walkKit:DEFAULT_KIT;
-  const clean=p.cleanSteps&&p.cleanSteps.length?p.cleanSteps:DEFAULT_CLEAN;
-  let h='<section class="sec"><div class="sec-h"><h2>基本資料</h2><button class="link-btn" data-add="profile">編輯</button></div><div class="card"><dl class="kv">'+
+  let h=backMore()+'<section class="sec"><div class="sec-h"><h2>基本資料</h2><button class="link-btn" data-add="profile">編輯</button></div><div class="card"><dl class="kv">'+
     [["名字",p.name||"Lucky"],["品種",p.breed||"約克夏"],["性別",p.sex],["生日",fmtDate(p.birthday)],["到家日",fmtDate(p.homeDate)],["晶片號碼",p.chip],["體重",p.weight?p.weight+" kg":""],["備註",p.note]]
       .map(([k,v])=>'<dt>'+k+'</dt><dd>'+(v?esc(v):'<span class="muted">未填</span>')+'</dd>').join("")+
     '</dl></div></section>';
-  h+='<section class="sec"><div class="sec-h"><h2>出門散步帶什麼</h2><button class="link-btn" data-add="kit">修改清單</button></div><div class="card">'+checklist("kit",kit)+'</div><div class="hint">每天自動重新開始。</div></section>';
-  h+='<section class="sec"><div class="sec-h"><h2>散步回家清潔</h2><button class="link-btn" data-add="clean">修改清單</button></div><div class="card">'+checklist("clean",clean)+'</div></section>';
+  h+='<div class="hint">散步包和回家清潔搬到「照顧」裡了。</div>';
   const cat=S.itemCat;
   const lastBuy=i=>(i.buys&&i.buys.length?i.buys[i.buys.length-1]:"")||(i.createdAt||"").slice(0,10);
   const items=S.items.filter(i=>cat==="all"||i.cat===cat).sort((a,b)=>lastBuy(b).localeCompare(lastBuy(a)));
@@ -795,6 +839,372 @@ async function rebuy(id){
   if(await save("items",it.id,data)){await logShop(it,today(),true);toast("已記下今天又買了 "+it.name);}
 }
 
+/* ---------- 2026-11-15 規劃：到家準備、行事曆、照顧、預算、寄養 ---------- */
+const MORE_TABS=["prep","budget","foster","places","friends","lucky"];
+const MORE_TILES=[
+  {id:"prep",name:"到家準備",sub:"時間表、犬舍、跟爸媽說、要買的東西"},
+  {id:"budget",name:"預算",sub:"花費估算、急用金、記帳"},
+  {id:"foster",name:"寄養",sub:"乾爸乾媽、交接說明、寄養包"},
+  {id:"places",name:"地點",sub:"Lucky 去過的地方"},
+  {id:"friends",name:"朋友",sub:"狗朋友和喜歡牠的人"},
+  {id:"lucky",name:"Lucky 資料",sub:"基本資料、買過的東西、帳號"}
+];
+function hsh(s){let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;return Math.abs(h).toString(36);}
+function tbl(head,rows,cls){return '<div class="tbl'+(cls?' '+cls:'')+'"><table><thead><tr>'+head.map(x=>'<th>'+x+'</th>').join("")+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join("")+'</tr>').join("")+'</tbody></table></div>';}
+function ul(items){return '<ul class="plain">'+items.map(x=>'<li>'+x+'</li>').join("")+'</ul>';}
+function backMore(){return '<button class="link-btn backmore" data-go="more">← 更多</button>';}
+function sec(title,inner,right){return '<section class="sec"><div class="sec-h"><h2>'+title+'</h2>'+(right||'')+'</div>'+inner+'</section>';}
+function money(n){return "NT$ "+Math.round(n).toLocaleString("zh-TW");}
+function addMonths(s,n){const [y,m,d]=s.split("-").map(Number);const dt=new Date(y,m-1+n,Math.min(d,28));return dt.getFullYear()+"-"+pad(dt.getMonth()+1)+"-"+pad(dt.getDate());}
+function ym(s){const [y,m]=s.split("-");return y+" 年 "+Number(m)+" 月";}
+function arrived(){const p=S.profile||{};return !!(p.homeDate&&p.homeDate<=today());}
+function luckyBirth(){const p=S.profile||{};if(p.birthday)return {d:p.birthday,est:false};const home=p.homeDate||"2027-04-01";return {d:addMonths(home,-2),est:true};}
+function ageMonths(){const b=luckyBirth().d;const [y1,m1,d1]=b.split("-").map(Number);const [y2,m2,d2]=today().split("-").map(Number);return (y2-y1)*12+(m2-m1)-(d2<d1?1:0);}
+
+/* synced data: plan/state, cal/state, budget/state, foster/state, health/weights */
+async function saveDoc(path,patch){
+  if(!S.db){toast("請先登入 Microsoft 帳號");return false;}
+  const cur={...((DATA&&DATA.docs&&DATA.docs[path])||{})};delete cur._u;
+  try{await S.db.doc(path).set({...cur,...patch});return true;}catch(e){toast("沒有存成功，請再試一次");return false;}
+}
+function pcheck(key,items){
+  const done=(S.plan&&S.plan.checks)||{};
+  return items.map(x=>{const k=key+"-"+hsh(x);const on=!!done[k];return '<div class="check'+(on?' done':'')+'"><input type="checkbox" id="pc-'+k+'" data-pcheck="'+k+'"'+(on?' checked':'')+'><label for="pc-'+k+'">'+x+'</label></div>';}).join("");
+}
+async function togglePcheck(k,on){
+  const checks={...((S.plan&&S.plan.checks)||{})};
+  if(on)checks[k]=today();else delete checks[k];
+  await saveDoc("plan/state",{checks});
+}
+
+/* ---------- 更多 ---------- */
+function renderMore(){
+  return sec("更多",'<div class="tiles">'+MORE_TILES.map(t=>'<button class="tile" data-go="'+t.id+'"><b>'+t.name+'</b><span>'+t.sub+'</span></button>').join("")+'</div>');
+}
+
+/* ---------- 到家準備 ---------- */
+const DEFAULT_BREEDERS=[{name:"亨佑犬舍（新北）",url:"https://hengyou.com.tw/pics-list-1.html",note:"有特定寵物業繁殖許可（新北市特寵業繁字第 A1070161 號）。網站一直強調「茶杯型」，要說清楚要正常體型、健康的。沒寫地址和健康保證，要直接問。"}];
+const ASK_BREEDER=["我想 3 月底到 4 月接小狗，那時候會有約克夏嗎？大概什麼時候出生？","可以先去犬舍參觀、看狗爸爸狗媽媽嗎？","狗爸媽成年體重大概多少？（兩隻都在 2～3 公斤之間最好）","接走時打過幾劑疫苗？有晶片和寵物登記嗎？","有沒有寫下來的健康保證？保證多久、包含哪些病？","價格大概多少？"];
+const PARENT_POINTS=["狗住我的房間，白天在院子，晚上回房間","柴犬和 Lucky 不會單獨碰面，我會顧好門","院子給貓咪和 Lucky 共用，我會慢慢讓牠們認識","費用都由我自己負責","不能餵的食物（尤其葡萄、巧克力、骨頭）","想請你們當 Lucky 的乾爸乾媽，我出遠門時幫忙照顧"];
+const BUY_LIST=["圍欄（Lucky 在房間的窩）","網格尿盆和尿墊","外出背包（騎機車要固定得住）","狗床或軟墊、Lucky 專用毯子","碗兩個（水、飯）","胸背帶和牽繩（不用項圈）","排梳、軟毛梳、指甲剪","寵物酵素清潔劑","可以咬的玩具、小型犬潔牙骨","自動餵食器（約 3,000 元，有鏡頭更安心）","空氣清淨機，活性碳濾網（3,000～6,000 元）","幼犬飼料（跟犬舍同一款）","寵物濕紙巾（無酒精、無香精）、狗用洗毛精","料理秤（秤飼料公克數）"];
+function renderPrep(){
+  const P=S.plan||{};const breeders=P.breeders&&P.breeders.length?P.breeders:DEFAULT_BREEDERS;
+  let h=backMore();
+  h+=sec("時間表",'<div class="card">'+pcheck("time",["12 月 18 日　手術","12 月底～2 月　專心恢復，慢慢看犬舍、只看不決定","2 月初　春節，不接狗（鞭炮聲會嚇到小狗，犬舍和獸醫院也放假）","過年後　開始行銷工作","3 月回診　問醫生能不能抱小狗、彎腰、被撲到","3 月中～4 月　醫生說可以，就去看狗、接回家"])+'</div>'+
+    '<div class="hint">已決定：買小狗、從小養；一定親自去犬舍看；前兩個月中午回家餵牠。</div>');
+  h+=sec("候選犬舍",breeders.map((b,i)=>'<div class="item"><div class="grow"><h3>'+esc(b.name)+'</h3>'+(b.note?'<div class="small">'+esc(b.note)+'</div>':'')+'</div><div class="btn-row" style="flex-direction:column;align-items:flex-end">'+(/^https:\/\//.test(b.url||"")?'<a class="maplink" href="'+esc(b.url)+'" target="_blank" rel="noopener">網站</a>':'')+'<button class="link-btn small" data-breeder="'+i+'">編輯</button></div></div>').join(""),'<button class="link-btn" data-breeder="new">＋ 新增</button>');
+  h+=sec("問犬舍的問題",'<div class="card">'+pcheck("askb",ASK_BREEDER)+'</div><div class="hint">可以直接用 LINE 問。現在先問、先參觀，真的要訂等過年後回診完再決定。</div>');
+  h+=sec("挑狗要注意",'<div class="card guide">'+ul(["<b>要小型，但不要「越小越好」：</b>約克夏正常成犬 2～3 公斤。成犬不到 2 公斤的「茶杯」比較容易低血糖、骨折、肝臟出問題。","<b>找合法犬舍：</b>要有特定寵物業許可證，字號可以到農業部的寵物登記管理資訊網查。","<b>至少 8 週大才能離開母狗</b>，這是法律規定。","<b>看得到母狗和環境：</b>母狗健康、環境乾淨，小狗不怕人。","<b>檢查膝蓋：</b>約克夏常見膝蓋骨脫臼，可以請獸醫摸看看。","<b>要有書面保證：</b>疫苗紀錄、晶片登記、傳染病的健康保證期。"])+'</div>');
+  h+=sec("跟爸媽說",'<div class="card guide">'+ul(["<b>先找家裡比較可能支持你的人</b>，讓爸爸知道不是你一個人的主意。","<b>當面、慢慢說、說短一點。</b>準備一張紙寫上重點給他看，比較不會聽錯。","<b>說成「我已經想好了」，不要問「可不可以」。</b>把安排說給他聽，讓他知道不會打亂他的生活。","<b>挑時間：</b>不要在手術前，等恢復、氣氛好的時候。","<b>他當場發脾氣就先不吵</b>，說「我再想想」，過幾天再提。不要偷偷先把狗帶回家。"])+'</div>'+
+    '<div class="lbl small muted">要說到的重點</div><div class="card">'+pcheck("parents",PARENT_POINTS)+'</div>'+
+    '<div class="hint">爸媽也是 Lucky 的乾爸乾媽，詳細在「寄養」。心裡也先想好：如果爸爸很強烈反對，你能接受等多久？</div>');
+  h+=sec("到家前要買",'<div class="card">'+pcheck("buy",BUY_LIST)+'</div><div class="hint">價錢都放在「預算」裡。</div>');
+  return h;
+}
+function openBreeder(i){
+  const P=S.plan||{};const list=(P.breeders&&P.breeders.length?P.breeders:DEFAULT_BREEDERS).map(x=>({...x}));
+  const isNew=i==="new";const b=isNew?{name:"",url:"",note:""}:list[+i];
+  const body='<div class="field"><label for="bName">名稱</label><input id="bName" value="'+esc(b.name)+'"></div>'+
+    '<div class="field"><label for="bUrl">網站或社群連結</label><input id="bUrl" value="'+esc(b.url||"")+'" placeholder="https://"></div>'+
+    '<div class="field"><label for="bNote">筆記</label><textarea id="bNote" placeholder="價格、體型、參觀心得">'+esc(b.note||"")+'</textarea></div>'+
+    '<button class="primary" id="bSave">儲存</button>'+(isNew?'':'<button class="danger" id="bDel" data-label="刪除">刪除</button>');
+  openSheet(isNew?"新增犬舍":"編輯犬舍",body,(sh)=>{
+    $("#bSave").onclick=async()=>{const nb={name:$("#bName").value.trim(),url:$("#bUrl").value.trim(),note:$("#bNote").value.trim()};if(!nb.name){toast("請填名稱");return;}if(isNew)list.push(nb);else list[+i]=nb;if(await saveDoc("plan/state",{breeders:list})){closeSheet();toast("已儲存");}};
+    const del=sh.querySelector("#bDel");if(del)armDelete(del,async()=>{list.splice(+i,1);if(await saveDoc("plan/state",{breeders:list})){closeSheet();toast("已刪除");}});
+  });
+}
+
+/* ---------- 預算 ---------- */
+const COST_CATS=["買狗","用品","飼料","零食","尿墊","醫療","疫苗和驅蟲","美容","課程","保險","其他"];
+function renderBudget(){
+  const B=S.budget||{};const fund=+B.fund||0,target=+B.target||40000;
+  const y=today().slice(0,4),m=today().slice(0,7);
+  const costs=S.costs||[];
+  const sum=f=>costs.filter(f).reduce((a,c)=>a+(+c.amount||0),0);
+  let h=backMore();
+  h+='<div class="stats"><div class="stat"><span>第一年（含買狗）</span><b>約 8～12 萬</b></div><div class="stat"><span>之後每年</span><b>約 4～6 萬</b></div></div>';
+  h+=sec("實際花費",'<div class="stats"><div class="stat"><span>這個月</span><b>'+money(sum(c=>(c.date||"").slice(0,7)===m))+'</b></div><div class="stat"><span>今年</span><b>'+money(sum(c=>(c.date||"").slice(0,4)===y))+'</b></div></div>'+
+    (costs.length?'<div class="card">'+costs.slice(0,30).map(c=>'<button class="costrow" data-cost="'+esc(c.id)+'"><span class="d">'+fmtDate(c.date)+'</span><span class="grow">'+esc(c.cat||"")+(c.note?'・'+esc(c.note):'')+'</span><b>'+money(+c.amount||0)+'</b></button>').join("")+'</div>':'<div class="card empty"><p>按右下角 ＋ 記一筆。接回家三個月後，就知道 Lucky 真正的開銷。</p></div>'));
+  const pct=Math.min(100,fund/target*100);
+  h+=sec("Lucky 急用金",'<div class="card"><div class="row" style="align-items:baseline"><div class="grow"><b style="font-size:20px">'+money(fund)+'</b> <span class="small muted">／ 目標 '+money(target)+'</span></div><button class="ghost" data-fund="1">存入</button></div><div class="meter" style="margin-top:8px"><i style="width:'+pct+'%"></i></div><div class="hint" style="margin-top:6px">每月存 1,000～2,000 元慢慢存滿。保險不夠賠的部分，從這裡出。</div></div>');
+  h+=sec("一次性（第一年）",tbl(["項目","大約金額"],[["小狗","23,000～38,000"],["用品：圍欄、網格尿盆、外出包、床、碗、胸背帶、梳子、指甲剪、酵素清潔劑、玩具","5,000～10,000"],["空氣清淨機（房間沒通風）","3,000～6,000"],["自動餵食器","約 3,000"],["結紮（約 6 個月大）","1,500～3,200"],["幼幼班（犬研室，6 堂）","9,000"],["<b>合計</b>","<b>約 4.5 萬～6.9 萬</b>"]]));
+  h+=sec("每月",tbl(["項目","大約金額"],[["飼料","500～1,000"],["尿墊","300～600"],["零食（訓練會用很多）","300"],["驅蟲＋心絲蟲預防","400～1,100"],["美容（平均到每月）","約 1,000"],["<b>合計</b>","<b>約 2,500～4,000</b>"]]));
+  h+=sec("每年",tbl(["項目","大約金額"],[["疫苗（多合一＋狂犬病）","3,200～4,600"],["健康檢查","1,000～3,000"],["寵物保險","3,800～6,700"],["基礎班（視情況）","9,000"],["<b>合計（不含基礎班）</b>","<b>約 8,000～14,000</b>"]]));
+  h+=sec("生病和意外",'<div class="card guide">'+ul(["驅蟲藥其實不貴，約克夏體重輕，用最小劑量。一個月一顆，算在每月預算裡。","真正貴的是意外：狗咬傷清創縫合可能上萬，住院一天幾百到兩千多元。","約克夏常見膝蓋骨脫臼，嚴重要開刀，常見要好幾萬。","小型犬牙齒容易出問題，洗牙要麻醉，一次幾千到上萬元。"])+'<p><b>兩層保護：</b>保險（每次理賠有上限，最便宜的方案每次住院只賠 1 萬、自付兩成；可以比較國泰的寵物險，8 週到 6 歲可以投保）＋ Lucky 急用金。</p></div>');
+  h+=sec("省錢方法",'<div class="card guide">'+ul(["毛剪短一點，美容拉長到 6～8 週一次","尿墊、飼料特價時一次買一箱","學會自己剪指甲、梳毛","高級飼料不用買最貴的，Lucky 吃了便便成形、毛有光澤、精神好就是對的"])+'</div><div class="hint">以上大多參考 2022 年的養狗花費整理加上估計，保險價格參考 2026 年資料，實際以你記的帳為準。另外每年約少存 4～6 萬給環遊世界，要算進去。</div>');
+  return h;
+}
+function openCost(id){
+  const c=id?S.costs.find(x=>x.id===id):null;
+  const d=c?{...c}:{date:today(),cat:"飼料",amount:"",note:""};
+  const body='<div class="two"><div class="field"><label for="cDate">日期</label><input type="date" id="cDate" value="'+esc(d.date)+'"></div><div class="field"><label for="cAmt">金額（元）</label><input id="cAmt" inputmode="numeric" value="'+esc(d.amount)+'"></div></div>'+
+    '<div class="field"><label for="cCat">分類</label><select id="cCat">'+COST_CATS.map(x=>'<option'+(x===d.cat?' selected':'')+'>'+x+'</option>').join("")+'</select></div>'+
+    '<div class="field"><label for="cNote">備註</label><input id="cNote" value="'+esc(d.note||"")+'" placeholder="例如：幼犬飼料 1.5 公斤"></div>'+
+    '<button class="primary" id="cSave">儲存</button>'+(c?'<button class="danger" id="cDel" data-label="刪除">刪除</button>':'');
+  openSheet(c?"編輯花費":"記一筆花費",body,(sh)=>{
+    $("#cSave").onclick=async()=>{const amt=parseFloat(($("#cAmt").value||"").replace(/[^\d.]/g,""));if(!amt){toast("請填金額");return;}if(await save("costs",c?c.id:null,{date:$("#cDate").value||today(),cat:$("#cCat").value,amount:amt,note:$("#cNote").value.trim()})){closeSheet();toast("已記下");}};
+    const del=sh.querySelector("#cDel");if(del)armDelete(del,async()=>{if(await remove("costs",c.id)){closeSheet();toast("已刪除");}});
+  });
+}
+function openFund(){
+  const B=S.budget||{};
+  const body='<div class="field"><label for="fAdd">這次存入（元）</label><input id="fAdd" inputmode="numeric" placeholder="1000"></div>'+
+    '<div class="field"><label for="fTarget">目標金額（元）</label><input id="fTarget" inputmode="numeric" value="'+esc(B.target||40000)+'"></div>'+
+    '<div class="field"><label for="fNow">目前總額（要修正才改）</label><input id="fNow" inputmode="numeric" value="'+esc(B.fund||0)+'"></div>'+
+    '<button class="primary" id="fSave">儲存</button>';
+  openSheet("Lucky 急用金",body,()=>{
+    $("#fSave").onclick=async()=>{const add=parseFloat($("#fAdd").value)||0;const now=parseFloat($("#fNow").value)||0;const target=parseFloat($("#fTarget").value)||40000;if(await saveDoc("budget/state",{fund:now+add,target})){closeSheet();toast(add?"已存入 "+money(add):"已更新");}};
+  });
+}
+
+/* ---------- 行事曆 ---------- */
+const CAL_CATS=["飲食","清潔","健康","美容","訓練","活動","錢","紀念"];
+const FREQS=[["d","每天","今天"],["w","每週","這週"],["m","每月","這個月"],["y","每年","今年"]];
+const CAL=[
+ ["food-d1","飲食","d","定時餵 2～4 餐，看餵食器有沒有正常出飯"],["food-d2","飲食","d","換乾淨的水"],
+ ["food-w1","飲食","w","洗碗、檢查飼料剩多少"],["food-m1","飲食","m","補飼料和零食"],["food-y1","飲食","y","滿 1 歲改吃小型成犬飼料"],
+ ["clean-d1","清潔","d","帶去上廁所、換尿墊"],["clean-d2","清潔","d","散步回家清潔"],
+ ["clean-w1","清潔","w","洗床布、毯子、玩具、尿盆"],["clean-m1","清潔","m","補尿墊、酵素清潔劑，看空氣清淨機濾網"],["clean-y1","清潔","y","大掃除時清狗窩周圍"],
+ ["health-d1","健康","d","看精神、食慾、大便正不正常"],["health-w1","健康","w","量體重（幼犬期）"],
+ ["health-m1","健康","m","吃驅蟲加心絲蟲的藥（每月 1 號）"],["health-y1","健康","y","多合一疫苗、狂犬病疫苗（法律規定每年打）"],["health-y2","健康","y","健康檢查、請獸醫看牙齒"],["health-y3","健康","y","確認晶片登記的聯絡資料是對的"],
+ ["groom-d1","美容","d","梳毛 1～2 分鐘、擦眼睛周圍"],["groom-w1","美容","w","刷牙 2～3 次"],["groom-w2","美容","w","檢查耳朵"],["groom-w3","美容","w","洗澡（1～2 週一次）"],
+ ["groom-m1","美容","m","剪指甲（2～3 週一次）"],["groom-m2","美容","m","美容修毛（4～6 週一次）"],["groom-y1","美容","y","夏天剪短、冬天留長"],
+ ["train-d1","訓練","d","練習三次，每次 3 分鐘"],["train-w1","訓練","w","複習學會的，加一個新項目"],["train-m1","訓練","m","看技能進度，決定下個月練什麼"],["train-y1","訓練","y","檢查要不要上下一階段的課"],
+ ["act-d1","活動","d","散步、玩耍、嗅聞遊戲"],["act-w1","活動","w","1～2 次新體驗：新地方、新聲音、新朋友"],["act-m1","活動","m","去一個新的地點，例如寵物友善餐廳"],["act-y1","活動","y","一起出遊一次"],
+ ["money-m1","錢","m","存 Lucky 急用金、記帳"],["money-y1","錢","y","保險續約、看一年花了多少"],
+ ["memo-d1","紀念","d","隨手拍照記日記"],["memo-m1","紀念","m","拍一張「月照」"],["memo-y1","紀念","y","生日、到家紀念日、整理年度手冊"]
+].map(([id,cat,f,t])=>({id,cat,f,t}));
+function weekStart(d){const [y,m,dd]=d.split("-").map(Number);const dt=new Date(y,m-1,dd);dt.setDate(dt.getDate()-((dt.getDay()+6)%7));return dt.getFullYear()+"-"+pad(dt.getMonth()+1)+"-"+pad(dt.getDate());}
+function isDone(t){const d=((S.cal&&S.cal.done)||{})[t.id];if(!d)return false;const td=today();if(t.f==="d")return d===td;if(t.f==="w")return d>=weekStart(td);if(t.f==="m")return d.slice(0,7)===td.slice(0,7);return d.slice(0,4)===td.slice(0,4);}
+function calRow(t,showCat){const on=isDone(t);return '<div class="check'+(on?' done':'')+'"><input type="checkbox" id="cal-'+t.id+'" data-cal="'+t.id+'"'+(on?' checked':'')+'><label for="cal-'+t.id+'">'+t.t+'</label>'+(showCat?'<span class="ctag">'+t.cat+'</span>':'')+'</div>';}
+async function toggleCal(id){
+  const t=CAL.find(x=>x.id===id);if(!t)return;
+  const done={...((S.cal&&S.cal.done)||{})};
+  if(isDone(t))delete done[id];else done[id]=today();
+  await saveDoc("cal/state",{done});
+}
+const FIRST_YEAR=[[2,"到家，帶去獸醫做第一次健康檢查"],[2,"每 3～4 週打一劑疫苗，共 2～3 劑"],[3,"打狂犬病疫苗"],[4,"疫苗完成：開始散步、上幼幼班、可以去院子和虎頭山"],[4,"換牙期（到 6 個月），準備咬的玩具"],[6,"結紮，順便檢查乳牙有沒有掉乾淨；改成一天 2 餐"],[7,"外出還不順，考慮基礎班或一對一"],[12,"1 歲生日：改吃成犬飼料，第一次年度疫苗和健檢"]];
+function dueAlerts(){
+  const a=[];const td=today();
+  const med=CAL.find(x=>x.id==="health-m1");
+  if(arrived()&&!isDone(med))a.push("這個月的驅蟲加心絲蟲藥還沒吃");
+  const p=S.profile||{};
+  for(const [k,label] of [["birthday","生日"],["homeDate","到家紀念日"]]){
+    if(!p[k])continue;const md=p[k].slice(5);const thisYear=td.slice(0,4)+"-"+md;const n=daysBetween(td,thisYear);
+    if(n>=0&&n<=7&&p[k].slice(0,4)<td.slice(0,4))a.push((n===0?"今天是":"再 "+n+" 天是")+" Lucky 的"+label);
+  }
+  return a;
+}
+function renderCal(){
+  const v=S.calView;
+  let h='<section class="sec"><div class="sec-h"><h2>行事曆</h2></div><div class="seg" role="group"><button data-calview="table" aria-pressed="'+(v==="table")+'">總表</button><button data-calview="time" aria-pressed="'+(v==="time")+'">照時間看</button><button data-calview="cat" aria-pressed="'+(v==="cat")+'">照分類看</button></div>';
+  if(!arrived())h+='<div class="notice">Lucky 還沒到家，可以先看看每天要做什麼。到家後在「Lucky 資料」填上到家日，這裡就會開始標出年紀和階段。</div>';
+  const al=dueAlerts();if(al.length)h+='<div class="due">'+al.map(x=>'<div>'+x+'</div>').join("")+'</div>';
+  h+='</section>';
+  if(v==="table"){
+    h+='<div class="tbl wide"><table class="matrix"><thead><tr><th>分類</th>'+FREQS.map(f=>'<th>'+f[1]+'</th>').join("")+'</tr></thead><tbody>'+
+      CAL_CATS.map(c=>'<tr><th>'+c+'</th>'+FREQS.map(f=>'<td>'+CAL.filter(t=>t.cat===c&&t.f===f[0]).map(t=>'<button class="mx'+(isDone(t)?' on':'')+'" data-calbtn="'+t.id+'">'+(isDone(t)?'✓ ':'')+t.t+'</button>').join("")+'</td>').join("")+'</tr>').join("")+
+      '</tbody></table></div><div class="hint">表格可以左右滑動看每月、每年。點一下就打勾或取消。每天的事隔天自動重新開始，每週、每月、每年的也一樣。</div>';
+  }else if(v==="cat"){
+    h+='<div class="chips wrap">'+CAL_CATS.map(c=>'<button class="chip" data-calcat="'+c+'" aria-pressed="'+(S.calCat===c)+'">'+c+'</button>').join("")+'</div>';
+    for(const f of FREQS){const ts=CAL.filter(t=>t.cat===S.calCat&&t.f===f[0]);if(!ts.length)continue;h+=sec(f[1],'<div class="card">'+ts.map(t=>calRow(t,false)).join("")+'</div>');}
+  }else{
+    for(const f of FREQS){const ts=CAL.filter(t=>t.f===f[0]);const n=ts.filter(isDone).length;h+=sec(f[2],'<div class="card">'+ts.map(t=>calRow(t,true)).join("")+'</div>','<span class="small muted">'+n+' / '+ts.length+'</span>');}
+  }
+  const b=luckyBirth();const age=ageMonths();
+  h+=sec("第一年的特別行程",'<div class="card">'+FIRST_YEAR.map(([mo,t])=>{const d=addMonths(b.d,mo);const past=arrived()&&age>=mo;return '<div class="fy'+(past?' past':'')+'"><span class="when">'+mo+' 個月<br><small>'+(b.est?'約 ':'')+ym(d)+'</small></span><span class="grow">'+t+'</span></div>';}).join("")+'</div>'+
+    '<div class="hint">'+(b.est?"日期是照預計 2027 年 4 月、2 個月大到家估算的；在「Lucky 資料」填上生日就會變準。":"日期照 Lucky 的生日算。")+'</div>');
+  return h;
+}
+
+/* ---------- 照顧 ---------- */
+const CARE_SECS=[["food","飲食"],["home","回家清潔"],["bags","包包"],["parts","用品與部位"]];
+const CLEAN_LV=[
+  {n:"第一級：日常",when:"平常散步、柏油路、天氣乾",steps:["濕紙巾擦四隻腳掌和趾縫","用乾毛巾擦乾","擦肚子和胸口","擦屁股","擦嘴巴周圍","全身梳一下，順便檢查壁蝨","給一顆零食"]},
+  {n:"第二級：髒了",when:"下雨、踩到草地泥土、去虎頭山",steps:["溫水沖四隻腳和肚子（不用洗毛精）","毛巾擦","吹風機吹乾趾縫和肚子","全身梳毛","檢查耳朵、腳掌、腋下有沒有壁蝨","給一顆零食"]},
+  {n:"第三級：全身洗",when:"滾到髒東西、去過動物醫院或人很多的地方、剛好 1～2 週沒洗",steps:["狗用洗毛精洗全身","潤絲或護毛乳","擦乾","完全吹乾","梳開全身的毛","給一顆零食"]}
+];
+const TRIP_KIT=["飲水瓶和折疊碗","一餐份的飼料","寵物濕紙巾","小毛巾","檢查壁蝨用的小梳子","外出背包（累了或遇到大狗時放進去）"];
+function renderCare(){
+  const s=S.careSec;
+  let h='<section class="sec"><div class="sec-h"><h2>照顧</h2></div><div class="seg" role="group">'+CARE_SECS.map(([id,n])=>'<button data-caresec="'+id+'" aria-pressed="'+(s===id)+'">'+n+'</button>').join("")+'</div></section>';
+  if(s==="home")h+=careHome();else if(s==="bags")h+=careBags();else if(s==="parts")h+=careParts();else h+=careFood();
+  return h;
+}
+const FORBID="巧克力、葡萄和葡萄乾、洋蔥、大蒜、蔥、含木糖醇的東西（口香糖、某些花生醬）、酒、咖啡和茶、夏威夷豆、楊桃、酪梨、水果的籽和核、煮過的骨頭、調味過的人類食物";
+function weightSvg(list){
+  if(list.length<2)return "";
+  const W=320,H=90,pd=8;const xs=list.map(x=>new Date(x.date).getTime());const ys=list.map(x=>+x.kg);
+  const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  const X=t=>pd+(x1===x0?0:(t-x0)/(x1-x0))*(W-2*pd),Y=v=>H-pd-(y1===y0?0.5:(v-y0)/(y1-y0))*(H-2*pd);
+  const pts=list.map((x,i)=>X(xs[i]).toFixed(1)+","+Y(ys[i]).toFixed(1)).join(" ");
+  return '<svg class="wsvg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="體重變化"><polyline points="'+pts+'" fill="none" stroke="var(--tan)" stroke-width="2.5" stroke-linejoin="round"/>'+list.map((x,i)=>'<circle cx="'+X(xs[i]).toFixed(1)+'" cy="'+Y(ys[i]).toFixed(1)+'" r="3" fill="var(--tan)"/>').join("")+'</svg>';
+}
+function careFood(){
+  const p=S.profile||{};const f=p.food||{};const age=arrived()?ageMonths():-1;
+  const ws=(S.weights||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+  let h=sec("現在吃的",'<div class="card"><dl class="kv">'+[["飼料",f.brand],["每餐",f.portion?f.portion+" 公克":""],["餵食時間",f.times],["喜歡的零食",f.likes],["不喜歡的",f.dislikes]].map(([k,v])=>'<dt>'+k+'</dt><dd>'+(v?esc(v):'<span class="muted">未填</span>')+'</dd>').join("")+'</dl></div>','<button class="link-btn" data-food="1">編輯</button>');
+  h+=sec("體重",(ws.length?'<div class="card">'+weightSvg(ws)+'<div class="small muted">'+ws.slice(-5).reverse().map(x=>fmtDate(x.date)+'　'+x.kg+' 公斤').join("<br>")+'</div></div>':'<div class="card empty"><p>幼犬期每週量一次，記在這裡就會畫成成長線。</p></div>'),'<button class="link-btn" data-weight="1">＋ 記體重</button>');
+  const meals=[[2,3,"4 餐","約克夏幼犬容易低血糖，不能餓太久"],[3,6,"3 餐","餵食器設好時間，上班也不怕"],[6,12,"2 餐","早晚各一餐"],[12,999,"2 餐","慢慢換成小型成犬飼料"]];
+  h+=sec("一天吃幾餐",'<div class="tbl"><table><thead><tr><th>年紀</th><th>餐數</th><th>說明</th></tr></thead><tbody>'+meals.map(([a,b,n,t])=>'<tr'+(age>=a&&age<b?' class="now"':'')+'><td>'+(b===999?"1 歲以上":a+"～"+b+" 個月")+'</td><td>'+n+'</td><td>'+t+'</td></tr>').join("")+'</tbody></table></div>'+
+    '<div class="notice"><b>低血糖要會認：</b>突然沒力氣、發抖、走路搖晃、精神很差。先在牙齦抹一點蜂蜜或糖水，馬上送醫。</div>');
+  h+=sec("吃什麼",'<div class="card guide">'+ul(["小型犬幼犬飼料，顆粒要小。","剛到家先吃犬舍原本那一款，接回家時問清楚牌子和份量。","換飼料花 7～10 天：新的從四分之一開始，一半、四分之三，最後全換。","份量照包裝的體重建議，用料理秤秤公克數。每週量體重再調整。","水要一直有，每天換新的。","零食不超過每天食量的十分之一；訓練時用很小顆的零食，或直接拿飼料當獎勵。"])+'</div>');
+  h+=sec("挑飼料",'<div class="card guide">'+ul(["有標示營養完整均衡、適合小型犬幼犬","成分表第一項是肉","牌子穩定、買得到，不會突然斷貨","Lucky 吃了便便成形、毛有光澤、精神好、體重正常長大","貴不一定好；冷凍乾燥肉、鮮食包偶爾當加料就好"])+'</div>');
+  h+=sec("水果",'<div class="card guide"><p><b>可以少量吃</b>（去皮、去籽、切小塊，一兩片指甲大小）：蘋果、香蕉、藍莓、西瓜、梨子、草莓。</p><p><b>不能吃：</b>葡萄和葡萄乾（傷腎，很危險）、楊桃、酪梨，所有水果的籽和核。荔枝、龍眼太甜，盡量不要。</p></div>');
+  h+=sec("絕對不能吃",'<div class="card guide"><p>'+FORBID+'。</p><p><b>骨頭也不要給：</b>煮過的會裂成尖刺，生的對約克夏太硬。想咬東西改買小型犬潔牙骨，吃的時候在旁邊看著。</p><button class="ghost" data-copyforbid="1">複製這段傳給爸媽</button></div>');
+  h+=sec("約克夏常見的問題",'<div class="card guide">'+ul(["<b>挑食：</b>飯放 15 分鐘沒吃完就收起來，下一餐再給，不要一直換口味或加料。","<b>牙齒：</b>乾飼料加刷牙，少給軟爛的人類食物。","<b>鮮食：</b>少量加料可以；整餐自己煮要請獸醫算營養。"])+'</div>');
+  return h;
+}
+function careHome(){
+  const lv=S.cleanLvl;const L=CLEAN_LV[lv];const p=S.profile||{};
+  const steps=lv===0&&p.cleanSteps&&p.cleanSteps.length?p.cleanSteps:L.steps;
+  let h=sec("回家要清到什麼程度",'<div class="seg" role="group">'+CLEAN_LV.map((x,i)=>'<button data-lvl="'+i+'" aria-pressed="'+(lv===i)+'">'+x.n.split("：")[0]+'</button>').join("")+'</div>'+
+    '<div class="card"><h3 style="font-size:17px">'+L.n+'</h3><div class="small muted" style="margin-bottom:6px">'+L.when+'</div>'+checklist("clean"+lv,steps)+'</div>'+
+    (lv===0?'<button class="link-btn small" data-add="clean">修改第一級清單</button>':'')+'<div class="hint">每天自動重新開始。照當天去了哪裡選一級，做完就算乾淨。</div>');
+  h+=sec("怎麼判斷乾淨了",'<div class="card guide">'+ul(["用乾淨的白色濕紙巾再擦一次腳掌，紙上沒有灰黑色就過關","摸趾縫和肚子是乾的","聞起來沒有異味"])+'</div>');
+  h+=sec("讓潔癖輕鬆的三件事",'<div class="card guide">'+ul(["<b>腳底毛、屁股毛、肚子毛都修短：</b>髒東西沒地方卡，第一級幾乎都能擦乾淨","<b>門口緩衝區：</b>回家先在門口踏墊上處理完，才進房間，房間一直是乾淨區","<b>Lucky 有自己的毯子：</b>上沙發或床先鋪牠的毯子，每週洗"])+'<p>想每天用水沖腳也可以，只要每次確實吹乾；腳一直濕濕的才會長黴菌、濕疹。</p></div>');
+  h+=sec("回家清潔站",tbl(["放什麼","用途"],[["寵物濕紙巾","擦腳掌、趾縫、屁股、嘴巴"],["小毛巾兩條","一條擦乾，一條備用"],["排梳","梳掉草屑、檢查壁蝨"],["吸水踏墊","站著擦腳，地板不會濕"],["有蓋小垃圾桶","丟用過的濕紙巾"]])+'<div class="hint">放在房間門口的小籃子裡。</div>');
+  return h;
+}
+function careBags(){
+  const p=S.profile||{};const kit=p.walkKit&&p.walkKit.length?p.walkKit:DEFAULT_KIT;
+  let h=sec("散步包（每天）",'<div class="card">'+checklist("kit",kit)+'</div><div class="hint">狗的便便一定要撿，不撿會被罰款；尿過的地方用水沖一下。</div>','<button class="link-btn" data-add="kit">修改清單</button>');
+  h+=sec("出遊包（虎頭山、出遠門再加）",'<div class="card">'+checklist("trip",TRIP_KIT)+'</div><div class="hint">騎機車載 Lucky 要用固定得住的背包或提籠，不要放腳踏墊上或抱著騎。</div>');
+  h+=sec("室內清潔包",tbl(["用品","用途"],[["寵物酵素清潔劑","地板上的尿和便便，徹底去味，牠才不會回同一個地方尿"],["廚房紙巾","先吸乾尿再噴清潔劑"],["尿墊備品","一尿就換"],["黏毛滾輪","床單、衣服上的毛"],["有蓋垃圾桶","用過的尿墊，每天拿出去丟"],["空氣清淨機濾網","照說明定期換"]]));
+  h+=sec("院子清潔包",tbl(["用品","用途"],[["小鏟子和拾便袋","每天撿便便"],["水管或水桶","沖洗尿過的地方"],["寵物酵素清潔劑（院子一罐）","去味"],["刷子","刷洗牠常趴的地方"]]));
+  h+=sec("去虎頭山要注意",'<div class="card guide">'+ul(["疫苗打完前不要去，大約 6 月以後","挑人少的時段，例如平日白天","全程繫牽繩，不讓 Lucky 主動找不認識的大狗","沒繫繩的大狗靠近：先閃開、擋在中間；衝過來就抱到胸口高度、身體轉開","山上有蚊子和壁蝨，驅蟲藥按時吃，回家用第二級清潔"])+'</div>');
+  return h;
+}
+function careParts(){
+  let h=sec("清潔用品",tbl(["用品","用在哪裡"],[["寵物濕紙巾（無酒精、無香精）","擦腳、屁股、嘴巴"],["狗用洗毛精（幼犬選溫和配方）","洗澡"],["狗用潤絲或護毛乳","長毛不打結"],["眼周清潔液","眼屎和淚痕"],["耳朵清潔液","每週清耳朵"],["寵物酵素清潔劑","地板、圍欄的尿和便便"]])+'<div class="notice"><b>不要用：</b>人的洗髮精和沐浴乳、含酒精的濕紙巾、漂白水、精油（尤其茶樹精油，對狗有毒）。</div>');
+  h+=sec("要特別注意的部位",tbl(["部位","怎麼照顧"],[["屁股和生殖器","便便容易黏在毛上。美容時請店家修短「衛生毛」，上完大號看一眼，有沾到就擦掉"],["腳掌和趾縫","擦乾淨、一定要擦乾；腳底毛修短；看肉墊有沒有裂傷、指甲會不會太長"],["眼睛","每天擦眼屎；眼睛前面的毛修短或綁起來"],["耳朵","每週看一次；有臭味、發紅、一直抓就看醫生"],["嘴巴和牙齒","刷牙；換牙期看乳牙有沒有掉乾淨"],["毛","每天梳；耳後、腋下、肚子最容易打結；洗完要完全吹乾"]]));
+  h+=sec("為什麼狗不用天天洗澡",'<div class="card guide">'+ul(["人全身都會流汗，汗和油被細菌分解會有味道，所以要天天洗","狗幾乎不靠全身流汗，主要從腳掌散熱","狗的皮膚比人薄，靠一層天然油脂保護；洗太常反而變乾、發癢、更容易有味道"])+'<p>所以「每天擦乾淨、1～2 週洗一次澡」就是狗的乾淨標準。</p></div>');
+  h+=sec("上床一起睡",'<div class="card guide">'+ul(["每月的驅蟲藥按時吃，床上最該擔心的是跳蚤和壁蝨","散步回家確實擦乾淨、擦乾，睡前梳毛","床上鋪一條 Lucky 專用毯子，每週洗"])+'<p><b>幼犬期先不要上床：</b>會摔傷、半夜可能尿床、你開完刀半年內要避免牠踩到臉。前幾個月睡在床邊的圍欄或狗窩，大約半歲、會定點上廁所後再決定，上下床放小階梯。</p></div>');
+  return h;
+}
+function openFood(){
+  const p=S.profile||{};const f=p.food||{};
+  const fld=(id,l,v,ph)=>'<div class="field"><label for="'+id+'">'+l+'</label><input id="'+id+'" value="'+esc(v||"")+'"'+(ph?' placeholder="'+ph+'"':'')+'></div>';
+  const body=fld("fBrand","飼料牌子和口味",f.brand,"跟犬舍同一款")+'<div class="two">'+fld("fPortion","每餐（公克）",f.portion)+fld("fTimes","餵食時間",f.times,"7:30、12:30、18:30")+'</div>'+fld("fLikes","喜歡的零食",f.likes)+fld("fDis","不喜歡的",f.dislikes)+'<button class="primary" id="fdSave">儲存</button>';
+  openSheet("現在吃的",body,()=>{$("#fdSave").onclick=async()=>{if(await saveProfile({food:{brand:$("#fBrand").value.trim(),portion:$("#fPortion").value.trim(),times:$("#fTimes").value.trim(),likes:$("#fLikes").value.trim(),dislikes:$("#fDis").value.trim()}})){closeSheet();toast("已儲存");}};});
+}
+function openWeight(){
+  const body='<div class="two"><div class="field"><label for="wDate">日期</label><input type="date" id="wDate" value="'+today()+'"></div><div class="field"><label for="wKg">體重（公斤）</label><input id="wKg" inputmode="decimal" placeholder="0.9"></div></div><button class="primary" id="wSave">儲存</button>';
+  openSheet("記體重",body,()=>{$("#wSave").onclick=async()=>{const kg=parseFloat($("#wKg").value);if(!kg){toast("請填體重");return;}const d=$("#wDate").value||today();const list=(S.weights||[]).filter(x=>x.date!==d).concat([{date:d,kg}]);if(await saveDoc("health/weights",{list})){await saveProfile({weight:String(kg)});closeSheet();toast("已記下");}};});
+}
+
+/* ---------- 寄養 ---------- */
+const DEFAULT_PEOPLE=[{role:"主要",name:"爸媽",phone:"",note:""},{role:"備用",name:"",phone:"",note:"找一位朋友，或先看好一間寵物旅館"}];
+const HANDOVER_FIELDS=[["toilet","上廁所的習慣","例如：起床、飯後帶去尿盆；散步時會上大號"],["walk","散步時間","例如：傍晚 6 點，20～30 分鐘"],["fears","怕什麼","打雷、吹風機、大狗⋯"],["meds","要吃的藥",""],["owner","我的電話",""],["vet","常去的獸醫院和電話",""],["er","24 小時急診",""],["cap","緊急醫療我同意先處理的金額上限","例如：5,000 元，超過請先打給我"]];
+function renderFoster(){
+  const F=S.foster||{};const people=F.people&&F.people.length?F.people:DEFAULT_PEOPLE;
+  let h=backMore();
+  h+=sec("乾爸乾媽",people.map((p,i)=>'<div class="item"><div class="thumb">'+esc((p.role||"").slice(0,1))+'</div><div class="grow"><h3>'+esc(p.name||"還沒找")+'</h3><div class="small muted">'+esc(p.role||"")+(p.phone?'・'+esc(p.phone):'')+'</div>'+(p.note?'<div class="small">'+esc(p.note)+'</div>':'')+'</div><button class="link-btn small" data-person="'+i+'">編輯</button></div>').join(""),'<button class="link-btn" data-person="new">＋ 新增</button>');
+  h+=sec("提早培養感情",'<div class="card">'+pcheck("bond",["幼犬期請乾爸乾媽來家裡玩、餵零食","帶 Lucky 去他們家坐一兩個小時","試住一晚","都沒問題，才放心交給他們幾天"])+'</div>');
+  h+=sec("給乾爸乾媽的一頁",'<div class="card"><p class="small" style="margin:0 0 8px">把吃什麼、上廁所習慣、會的指令、怕什麼、緊急聯絡整理成一頁，可以截圖或複製文字傳給對方。</p><div class="btn-row"><button class="primary" style="width:auto;padding:10px 16px" data-handover="view">打開這一頁</button><button class="ghost" data-handover="edit">編輯內容</button></div></div>');
+  h+=sec("寄養包",'<div class="card">'+checklist("fpack",["照天數分好的飼料，一包一天","尿墊、牽繩、胸背帶","最喜歡的玩具","一件有你味道的舊衣服","要吃的藥","疫苗紀錄的照片"])+'</div><div class="hint">就算是親友，也準備謝禮或紅包，對方比較願意下次再幫忙。</div>');
+  h+=sec("四種選擇",tbl(["方式","適合","要注意"],[["乾爸乾媽","幾天到幾週，最放心","要先培養感情"],["到府保母","一兩天，留在熟悉的家","找有評價、能先見面的人"],["寵物旅館","臨時、找不到人時","每晚約幾百到一千多元，先參觀，確認大小狗分開"],["獸醫院住宿","生病或要吃藥時","比較貴，但有醫生在"]]));
+  h+=sec("環遊世界那一年",'<div class="card"><p style="margin:0">'+(F.yearPlan?esc(F.yearPlan):'<span class="muted">還沒想好：一整年，Lucky 會在誰身邊？</span>')+'</p></div>','<button class="link-btn" data-yearplan="1">編輯</button>');
+  return h;
+}
+function openPerson(i){
+  const F=S.foster||{};const list=(F.people&&F.people.length?F.people:DEFAULT_PEOPLE).map(x=>({...x}));
+  const isNew=i==="new";const p=isNew?{role:"備用",name:"",phone:"",note:""}:list[+i];
+  const body='<div class="two"><div class="field"><label for="pRole">角色</label><select id="pRole">'+["主要","備用","保母","寵物旅館"].map(x=>'<option'+(x===p.role?' selected':'')+'>'+x+'</option>').join("")+'</select></div><div class="field"><label for="pName">名字</label><input id="pName" value="'+esc(p.name)+'"></div></div>'+
+    '<div class="field"><label for="pPhone">電話／LINE</label><input id="pPhone" value="'+esc(p.phone||"")+'"></div><div class="field"><label for="pNote">備註</label><textarea id="pNote">'+esc(p.note||"")+'</textarea></div>'+
+    '<button class="primary" id="pSave">儲存</button>'+(isNew?'':'<button class="danger" id="pDel" data-label="刪除">刪除</button>');
+  openSheet(isNew?"新增照顧者":"編輯照顧者",body,(sh)=>{
+    $("#pSave").onclick=async()=>{const np={role:$("#pRole").value,name:$("#pName").value.trim(),phone:$("#pPhone").value.trim(),note:$("#pNote").value.trim()};if(isNew)list.push(np);else list[+i]=np;if(await saveDoc("foster/state",{people:list})){closeSheet();toast("已儲存");}};
+    const del=sh.querySelector("#pDel");if(del)armDelete(del,async()=>{list.splice(+i,1);if(await saveDoc("foster/state",{people:list})){closeSheet();toast("已刪除");}});
+  });
+}
+function handoverText(){
+  const p=S.profile||{};const f=p.food||{};const H=(S.foster&&S.foster.handover)||{};
+  const learned=trainingState().skills.filter(s=>s.status===2).map(s=>s.name);
+  const L=[];
+  L.push((p.name||"Lucky")+" 的照顧說明");
+  L.push("");
+  const food=[f.brand,f.portion?"每餐 "+f.portion+" 公克":"",f.times?"時間 "+f.times:""].filter(Boolean).join("，");
+  L.push("【吃】"+(food||"（還沒填）"));
+  L.push("隨時要有乾淨的水。零食少量就好。");
+  L.push("不能吃："+FORBID+"。");
+  if(H.toilet)L.push("【上廁所】"+H.toilet);
+  if(H.walk)L.push("【散步】"+H.walk+"。出門一定繫牽繩，不要跟不認識的大狗玩，柴犬不能碰到牠。");
+  if(learned.length)L.push("【會的指令】"+learned.join("、"));
+  if(H.fears)L.push("【怕的東西】"+H.fears);
+  if(H.meds)L.push("【吃藥】"+H.meds);
+  L.push("");
+  L.push("【要立刻送醫】吃到巧克力、葡萄、藥或有毒的東西；一直吐或拉、吐血或血便；呼吸困難、牙齦發白或發紫；抽搐、昏倒、站不起來；突然沒力氣、發抖（可能是低血糖，先在牙齦抹一點蜂蜜或糖水）。");
+  if(H.cap)L.push("【緊急醫療費用】"+H.cap);
+  L.push("");
+  if(H.owner)L.push("我的電話："+H.owner);
+  if(H.vet)L.push("獸醫院："+H.vet);
+  if(H.er)L.push("24 小時急診："+H.er);
+  return L.join("\n");
+}
+function openHandover(mode){
+  if(mode==="edit"){
+    const H=(S.foster&&S.foster.handover)||{};
+    const body=HANDOVER_FIELDS.map(([k,l,ph])=>'<div class="field"><label for="ho-'+k+'">'+l+'</label><input id="ho-'+k+'" value="'+esc(H[k]||"")+'"'+(ph?' placeholder="'+ph+'"':'')+'></div>').join("")+
+      '<div class="hint">吃什麼會從「照顧 › 飲食 › 現在吃的」自動帶入，會的指令從訓練的「學會了」帶入。</div><button class="primary" id="hoSave">儲存</button>';
+    openSheet("交接說明的內容",body,()=>{$("#hoSave").onclick=async()=>{const ho={};for(const [k] of HANDOVER_FIELDS)ho[k]=$("#ho-"+k).value.trim();if(await saveDoc("foster/state",{handover:ho})){closeSheet();toast("已儲存");}};});
+    return;
+  }
+  const t=handoverText();
+  openSheet("給乾爸乾媽的一頁",'<div class="card handover" id="hoText">'+esc(t)+'</div><div class="btn-row"><button class="primary" style="width:auto;padding:10px 16px" id="hoCopy">複製文字</button><button class="ghost" id="hoEdit">編輯內容</button></div>',()=>{
+    $("#hoCopy").onclick=()=>{try{navigator.clipboard.writeText(t).then(()=>toast("已複製，可以貼到 LINE"),()=>selText());}catch(e){selText();}};
+    $("#hoEdit").onclick=()=>openHandover("edit");
+  });
+  function selText(){const el=$("#hoText");const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);toast("已選取，請長按複製");}
+}
+function openYearPlan(){
+  const F=S.foster||{};
+  openSheet("環遊世界那一年",'<div class="field"><label for="ypText">Lucky 那一年會在誰身邊？</label><textarea id="ypText">'+esc(F.yearPlan||"")+'</textarea></div><button class="primary" id="ypSave">儲存</button>',()=>{$("#ypSave").onclick=async()=>{if(await saveDoc("foster/state",{yearPlan:$("#ypText").value.trim()})){closeSheet();toast("已儲存");}};});
+}
+
+/* ---------- 訓練：整合計畫 ---------- */
+const TRAIN_STAGES=[
+  {name:"到家～3 個月",when:"4～5 月",a:2,b:4,basic:"叫了會過來、不撲人、不亂咬、觸碰和梳毛",out:"看我、在家戴胸背帶和牽繩、乖乖待外出包",adv:"自己進圍欄",cls:"在家練"},
+  {name:"4～6 個月",when:"6～8 月",a:4,b:6,basic:"剪指甲（一次一隻腳）",out:"遇到狗和機車保持冷靜、不可以撿",adv:"配合照顧（下巴放手上）、嗅聞遊戲",cls:"幼幼班 6 週"},
+  {name:"6～7 個月",when:"9～10 月",a:6,b:7,basic:"出門不暴衝",out:"在旁邊走、等一下、戶外用長牽繩練「過來」",adv:"去墊子上待著",cls:"自己練"},
+  {name:"7 個月以上",when:"11 月起",a:7,b:999,basic:"每項都複習，青春期最容易退步",out:"外出綜合練習",adv:"趴下待久一點、小把戲",cls:"不順再報基礎班"}
+];
+const FIVE=[
+  ["叫了會過來","到家第一天","叫名字，牠一看你就給零食。慢慢拉遠距離，疫苗打完後在戶外用長牽繩練。","不要叫牠過來然後罵牠、洗澡、剪指甲，牠會以為「過來就沒好事」。"],
+  ["不撲人","到家第一天","牠撲上來就轉身不理，四隻腳著地才摸牠、跟牠說話。教牠「坐下」打招呼。手術後半年內特別重要。","全家人要一致，有一個人撲了還摸就前功盡棄。"],
+  ["不亂咬","到家第一天","咬手太大力就說「痛」，停止玩 10 秒。給可以咬的玩具，用零食跟牠「換」嘴裡的東西。","不要用手逗牠咬著玩。"],
+  ["乖乖梳毛剪指甲","到家第一週","每天摸腳掌、耳朵、嘴巴 1～2 分鐘配零食。梳子輕輕梳幾下；指甲剪先碰一下腳趾給零食，一天只剪一隻腳。","不要硬壓著剪完，一次不愉快牠會記很久。"],
+  ["出門不暴衝","疫苗打完前就在家練","在家先戴胸背帶和牽繩走。出門後牽繩是鬆的才往前走，一拉緊就停下來不動。","不要被牠拖著走，被拖一次牠就學會「拉就有用」。"]
+];
+const OUTSIDE=[["看我","叫一聲就抬頭看你。外面一分心先叫「看我」，是所有外出技能的基礎"],["不可以撿","路上的食物、菸蒂、骨頭，一靠近就說「不可以」，轉頭看你就給零食"],["等一下","出門口、過馬路、從外出包出來前先停，等你說可以才動"],["在旁邊走","走在你腳邊，不衝前面也不拖後面"],["遇到狗和機車保持冷靜","一看到就給零食，讓牠覺得「看到狗＝有好吃的」"],["乖乖待在外出包裡","騎機車、搭捷運高鐵、進不能落地的店都會用到"]];
+const ADVANCED=[["去墊子上待著","說一聲就去墊子趴好，有客人、去寵物友善餐廳很好用"],["趴下並待久一點","從幾秒拉到幾分鐘，你吃飯聊天時牠能安靜等"],["自己進籠子或圍欄","寄養、看醫生、美容、地震時都需要"],["配合照顧","下巴放你手上代表「準備好了」，一抬頭就停，比較不抗拒"],["嗅聞遊戲、益智玩具","動腦十分鐘像散步半小時，累了就不太會亂叫"],["小把戲","握手、轉圈、擊掌，好玩又能拍成影片"]];
+const CLASS_ASK=["幼幼班要打完幾劑疫苗才能上？","一班幾隻狗？大狗小狗會不會混在一起？","缺課能不能補？","桃園有沒有合作的訓練師，或到府家教大概多少錢？"];
+const EXTRA_SKILLS=["看我","不可以撿","在旁邊走","乖乖待在外出包","自己進圍欄","去墊子上待著","配合照顧（下巴放手上）","遇到狗保持冷靜","握手"];
+function renderTrainPlan(){
+  const age=arrived()?ageMonths():-1;
+  let h='<section class="sec"><h2>訓練</h2><div class="notice">每天三次、每次三分鐘左右就好。上一個階段的項目不會丟掉，變成每天順便複習。</div></section>';
+  h+=sec("整合時間表",TRAIN_STAGES.map(s=>{const now=age>=s.a&&age<s.b;return '<div class="stage'+(now?' now':'')+'"><div class="stage-h"><b>'+s.name+'</b><span>'+s.when+(now?'・現在':'')+'</span></div><dl class="kv"><dt>基本</dt><dd>'+s.basic+'</dd><dt>外出</dt><dd>'+s.out+'</dd><dt>進階</dt><dd>'+s.adv+'</dd><dt>課程</dt><dd>'+s.cls+'</dd></dl></div>';}).join("")+(age<0?'<div class="hint">月份是照 4 月接回家估的；到家後會自動標出現在的階段。</div>':''));
+  h+=sec("五件最重要的事",'<div class="prio">'+FIVE.map(([n,w,how,avoid],i)=>'<details'+(i===0?' open':'')+'><summary>'+n+'</summary><p class="small muted">從'+w+'開始</p><p><b>怎麼練：</b>'+how+'</p><p><b>要避免：</b>'+avoid+'</p></details>').join("")+'</div>');
+  h+=sec("外出好控制",tbl(["技能","用在哪裡"],OUTSIDE.map(([a,b])=>['<b>'+a+'</b>',b])));
+  h+=sec("更進階的",tbl(["技能","用在哪裡"],ADVANCED.map(([a,b])=>['<b>'+a+'</b>',b])));
+  const notes=((S.plan&&S.plan.classNotes)||[]).slice().sort((a,b)=>b.date.localeCompare(a.date));
+  h+=sec("課程",'<div class="card guide"><p><b>幼幼班（6 個月以下）</b>：犬研室，台北中山區，每班 6 堂、每週 1 小時，特價 9,000 元。照護訓練、社會化、玩具互動、嗅聞遊戲、看懂安定訊號。預計 6～8 月上。</p><p><b>基礎班（7 個月以上）</b>：坐、趴、等待、放掉、鬆繩散步、響片訓練。先不報，自己練不順再上。</p><p class="small muted">自己最難做到的只有「安全地跟其他小狗玩」，所以幼幼班值得上。要找用零食和稱讚教的訓練師。</p><a class="maplink" href="https://doggy-lab.com/" target="_blank" rel="noopener">犬研室網站</a></div>'+
+    '<div class="lbl small muted">報名前要問的問題</div><div class="card">'+pcheck("classask",CLASS_ASK)+'</div>'+
+    '<div class="lbl small muted">課堂筆記</div>'+(notes.length?'<div class="card">'+notes.map((n,i)=>'<button class="costrow" data-cnote="'+esc(n.id)+'"><span class="d">'+fmtDate(n.date)+'</span><span class="grow" style="white-space:pre-wrap">'+esc(n.text)+'</span></button>').join("")+'</div>':'<div class="card empty"><p>每堂課學了什麼、回家要練什麼，記在這裡。</p></div>'),
+    '<button class="link-btn" data-cnote="new">＋ 筆記</button>');
+  h+=sec("不亂叫",'<div class="card guide">'+ul(["從小社會化，不怕了就不會一直叫","體力和腦力消耗夠，累了比較安靜","叫的時候不理牠，安靜了才稱讚、給零食；罵牠會讓牠以為你在一起叫","擋住讓牠叫的東西，例如窗戶貼霧面貼紙","從短時間開始練習獨處","不要用止吠項圈"])+'</div>');
+  return h;
+}
+function openClassNote(id){
+  const list=((S.plan&&S.plan.classNotes)||[]).map(x=>({...x}));
+  const isNew=id==="new";const n=isNew?{id:newId(),date:today(),text:""}:list.find(x=>x.id===id);if(!n)return;
+  const body='<div class="field"><label for="cnDate">日期</label><input type="date" id="cnDate" value="'+esc(n.date)+'"></div><div class="field"><label for="cnText">學了什麼、回家要練什麼</label><textarea id="cnText" style="min-height:140px">'+esc(n.text)+'</textarea></div><button class="primary" id="cnSave">儲存</button>'+(isNew?'':'<button class="danger" id="cnDel" data-label="刪除">刪除</button>');
+  openSheet(isNew?"新增課堂筆記":"課堂筆記",body,(sh)=>{
+    $("#cnSave").onclick=async()=>{const t=$("#cnText").value.trim();if(!t){toast("請寫一點內容");return;}const nn={id:n.id,date:$("#cnDate").value||today(),text:t};const out=isNew?list.concat([nn]):list.map(x=>x.id===n.id?nn:x);if(await saveDoc("plan/state",{classNotes:out})){closeSheet();toast("已儲存");}};
+    const del=sh.querySelector("#cnDel");if(del)armDelete(del,async()=>{if(await saveDoc("plan/state",{classNotes:list.filter(x=>x.id!==n.id)})){closeSheet();toast("已刪除");}});
+  });
+}
+
 /* ---------- render ---------- */
 function render(){
   renderHeader();
@@ -803,10 +1213,12 @@ function render(){
   else if(S.sync==="offline")st.innerHTML='<div class="notice">目前沒有連上 OneDrive，新的文字紀錄會先存在這支手機，連上網路後自動同步。照片和影片要連線才能上傳。</div>';
   else st.innerHTML="";
   const m=$("#main");
-  m.innerHTML = S.tab==="diary"?renderDiary():S.tab==="places"?renderPlaces():S.tab==="friends"?renderFriends():S.tab==="train"?renderTrain():renderLucky();
-  document.querySelectorAll(".nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===S.tab?"page":"false"));
+  const R={diary:renderDiary,cal:renderCal,care:renderCare,train:renderTrain,more:renderMore,prep:renderPrep,budget:renderBudget,foster:renderFoster,places:renderPlaces,friends:renderFriends,lucky:renderLucky};
+  m.innerHTML=(R[S.tab]||renderDiary)();
+  const navTab=MORE_TABS.includes(S.tab)?"more":S.tab;
+  document.querySelectorAll(".nav button").forEach(b=>b.setAttribute("aria-current",b.dataset.tab===navTab?"page":"false"));
   if(S.tab==="lucky"&&S.auth==="in")m.insertAdjacentHTML("beforeend",'<section class="sec"><h2>帳號</h2><div class="card"><dl class="kv"><dt>登入</dt><dd>'+esc(S.me||"Microsoft 帳號")+'</dd><dt>存放</dt><dd>OneDrive「應用程式／Origina／Lucky」</dd><dt>同步</dt><dd>'+(S.sync==="offline"?"還沒同步，等網路恢復":DIRTY?"同步中⋯":"已同步")+'</dd></dl><button class="ghost" id="logoutBtn" style="margin-top:12px">登出</button></div></section>');
-  $("#fab").hidden=!S.db||S.tab==="train";
+  $("#fab").hidden=!S.db||!["diary","places","friends","lucky","budget"].includes(S.tab);
   renderCloud();
 }
 
@@ -1070,7 +1482,7 @@ function openList(key){
   const isKit=key==="kit";
   const cur=isKit?(p.walkKit&&p.walkKit.length?p.walkKit:DEFAULT_KIT):(p.cleanSteps&&p.cleanSteps.length?p.cleanSteps:DEFAULT_CLEAN);
   const body='<div class="field"><label for="lsText">一行一項</label><textarea id="lsText" style="min-height:200px">'+esc(cur.join("\n"))+'</textarea></div><button class="primary" id="lsSave">儲存</button>';
-  openSheet(isKit?"散步要帶的東西":"散步回家清潔",body,()=>{
+  openSheet(isKit?"散步包":"回家清潔・第一級",body,()=>{
     $("#lsSave").onclick=async()=>{
       const arr=$("#lsText").value.split("\n").map(s=>s.trim()).filter(Boolean);
       const ok=await saveProfile(isKit?{walkKit:arr}:{cleanSteps:arr});
@@ -1138,7 +1550,7 @@ document.querySelector(".nav").addEventListener("click",e=>{const b=e.target.clo
 $("#cloud").onclick=()=>{if(S.auth!=="in"){login(false);return;}S.tab="lucky";render();setTimeout(()=>{const h=[...document.querySelectorAll("#main h2")].find(x=>x.textContent==="帳號");h&&h.scrollIntoView({behavior:"smooth"});},50);};
 if(window.top!==window.self){const b=$("#backO");b&&(b.style.visibility="hidden");}
 $("#fab").onclick=()=>{
-  if(S.tab==="places")openPlace();else if(S.tab==="friends")openFriend();else if(S.tab==="lucky")openItem();else openEntry();
+  if(S.tab==="places")openPlace();else if(S.tab==="friends")openFriend();else if(S.tab==="lucky")openItem();else if(S.tab==="budget")openCost();else openEntry();
 };
 $("#main").addEventListener("click",e=>{
   const t=e.target;
@@ -1147,6 +1559,22 @@ $("#main").addEventListener("click",e=>{
   let b;
   if((b=t.closest("[data-quick]"))){const [ty,lab]=b.dataset.quick.split("|");quickLog(ty,lab);return;}
   if((b=t.closest("[data-filter]"))){S.filter=b.dataset.filter;render();return;}
+  if((b=t.closest("[data-go]"))){S.tab=b.dataset.go;render();window.scrollTo(0,0);return;}
+  if((b=t.closest("[data-calview]"))){S.calView=b.dataset.calview;try{localStorage.setItem("lucky-calview",JSON.stringify(S.calView));}catch(e){}render();return;}
+  if((b=t.closest("[data-calcat]"))){S.calCat=b.dataset.calcat;render();return;}
+  if((b=t.closest("[data-calbtn]"))){if(!S.db){toast("請先登入 Microsoft 帳號");return;}toggleCal(b.dataset.calbtn);return;}
+  if((b=t.closest("[data-caresec]"))){S.careSec=b.dataset.caresec;render();return;}
+  if((b=t.closest("[data-lvl]"))){S.cleanLvl=+b.dataset.lvl;render();return;}
+  if((b=t.closest("[data-breeder]"))){openBreeder(b.dataset.breeder);return;}
+  if((b=t.closest("[data-cost]"))){openCost(b.dataset.cost);return;}
+  if((b=t.closest("[data-fund]"))){openFund();return;}
+  if((b=t.closest("[data-food]"))){openFood();return;}
+  if((b=t.closest("[data-weight]"))){openWeight();return;}
+  if((b=t.closest("[data-person]"))){openPerson(b.dataset.person);return;}
+  if((b=t.closest("[data-handover]"))){openHandover(b.dataset.handover);return;}
+  if((b=t.closest("[data-yearplan]"))){openYearPlan();return;}
+  if((b=t.closest("[data-cnote]"))){openClassNote(b.dataset.cnote);return;}
+  if((b=t.closest("[data-copyforbid]"))){copyText("Lucky 不能吃："+FORBID+"。骨頭也不要給。",b);return;}
   if((b=t.closest("[data-open]"))){openDetail(b.dataset.open);return;}
   if((b=t.closest("[data-quickcam]"))){openEntry(null,{at:localStamp()},true);return;}
   if((b=t.closest("#clearEx"))){clearExamples(b);return;}
@@ -1169,6 +1597,8 @@ $("#main").addEventListener("click",e=>{
   }
 });
 $("#main").addEventListener("change",e=>{
+  const pc=e.target.closest("[data-pcheck]");if(pc){if(!S.db){pc.checked=!pc.checked;toast("請先登入 Microsoft 帳號");return;}togglePcheck(pc.dataset.pcheck,pc.checked);return;}
+  const cc=e.target.closest("[data-cal]");if(cc){if(!S.db){cc.checked=!cc.checked;toast("請先登入 Microsoft 帳號");return;}toggleCal(cc.dataset.cal);return;}
   const c=e.target.closest("[data-daily]");if(!c)return;
   setDaily(c.dataset.daily,c.dataset.label,c.checked);c.closest(".check").classList.toggle("done",c.checked);
 });
@@ -1265,9 +1695,9 @@ function logout(){
 }
 
 /* ---------- data: one JSON file in the OneDrive app folder, cached on this device ---------- */
-const COLS=["entries","places","friends","items"];
+const COLS=["entries","places","friends","items","costs"];
 let DATA=null,ETAG=null,DIRTY=false;
-function emptyData(){return {v:1,entries:{},places:{},friends:{},items:{},docs:{},deleted:{}};}
+function emptyData(){return {v:1,entries:{},places:{},friends:{},items:{},costs:{},docs:{},deleted:{}};}
 function seedData(){
   const d=emptyData(),u=Date.now();
   d.places["ex-park"]={name:"河濱公園（範例）",kind:"散步／公園",note:"早上人少，有飲水機",url:"",createdAt:localStamp(),example:true,_u:u};
@@ -1305,6 +1735,9 @@ function applyData(){
   S.items=vals("items").sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||""));
   S.training=d.docs["training/state"]?{...d.docs["training/state"]}:null;
   S.profile=d.docs["profile/lucky"]?{...d.docs["profile/lucky"],id:"lucky"}:null;
+  S.costs=vals("costs").sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  S.plan=d.docs["plan/state"]||{};S.cal=d.docs["cal/state"]||{};S.budget=d.docs["budget/state"]||{};S.foster=d.docs["foster/state"]||{};
+  S.weights=(d.docs["health/weights"]||{}).list||[];
 }
 function writeCache(){ls(CACHE_KEY,{data:DATA,eTag:ETAG,dirty:DIRTY});}
 function changed(){DIRTY=true;applyData();writeCache();render();scheduleSync();}
