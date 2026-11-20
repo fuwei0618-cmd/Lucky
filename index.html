@@ -324,6 +324,15 @@ html,body{background:var(--bg) var(--grain)}
 .sec-h h2,.sec h2{letter-spacing:.02em}
 .todayp{display:none}
 
+@media (min-width:700px){
+  .app{max-width:900px;padding-inline:32px}
+  .tbl.wide table{min-width:0}
+  .pgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fab{right:max(24px,calc(50% - 426px))}
+  .cloud{right:max(24px,calc(50% - 426px))}
+  .nav-in{max-width:900px}
+}
 @media (min-width:900px) and (orientation:landscape){
   .nav{top:0;bottom:0;right:auto;width:88px;border-top:0;border-right:1px solid var(--line);padding:calc(16px + env(safe-area-inset-top,0px)) 0 16px}
   .nav-in{display:flex;flex-direction:column;gap:22px;margin:56px 0 0}
